@@ -19,7 +19,7 @@ interface ProductData {
 export class ProductClient {
   private axiosInstance: AxiosInstance;
 
-  constructor(baseUrl: string) {
+  constructor(baseUrl: string ) {
     this.axiosInstance = axios.create({
       baseURL: baseUrl,
     });
@@ -30,14 +30,14 @@ export class ProductClient {
     let nextUrl: string | null = "/api/product/products";
 
     try {
-      while (nextUrl) {
+      
         const response: AxiosResponse<{
           results: ProductData[];
           next: string | null;
         }> = await this.axiosInstance.get(nextUrl);
         products = [...products, ...response.data.results];
         nextUrl = response.data.next;
-      }
+      
       return products;
     } catch (error: any) {
       this.handleRequestError(error);
