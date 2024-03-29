@@ -55,4 +55,4 @@ export class CustomerClient {
 
 // Instantiate CustomerClient
 const baseUrl = "http://164.92.170.208";
-export const client = new CustomerClient(baseUrl);
+export const clientCustomers = new CustomerClient(baseUrl);
