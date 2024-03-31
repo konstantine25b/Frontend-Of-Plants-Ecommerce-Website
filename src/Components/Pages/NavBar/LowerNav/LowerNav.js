@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import COLORS from "../../styles/Colors";
+import COLORS from "../../../styles/Colors";
 import EachCategory from "./EachCategory";
 
 const Container = styled.div`
@@ -13,7 +13,7 @@ const Container = styled.div`
   align-items: center;
   background-color: ${COLORS.main};
   padding: 0.5rem;
-  height: 2rem;
+  height: 2.5rem;
   border-top: 0.5px solid black;
   background-color: ${COLORS.main};
   box-shadow: 0px 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
@@ -49,16 +49,31 @@ const Link = styled.a`
 
 const LowerNav = ({ categories }) => {
   const [activeCategory, setActiveCategory] = useState(null);
+  const lowerNavRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (lowerNavRef.current && !lowerNavRef.current.contains(event.target)) {
+        setActiveCategory(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleCategoryClick = (index) => {
     setActiveCategory(activeCategory === index ? null : index);
   };
 
   return (
-    <Container>
+    <Container ref={lowerNavRef}>
       <CategoryList>
         {categories?.map((category, index) => (
           <EachCategory
+            key={index}
             category={category}
             index={index}
             handleCategoryClick={handleCategoryClick}

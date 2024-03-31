@@ -1,31 +1,39 @@
 import styled from "@emotion/styled";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
-import COLORS from "../../styles/Colors";
+import COLORS from "../../../styles/Colors";
+import SubCategories from "./SubCategories";
 
 const CategoryItem = styled.li`
   font-size: 0.85rem;
   font-weight: bold;
   color: ${COLORS.text};
   text-transform: uppercase;
-  cursor: pointer;
+
   transition: color 0.3s, border-bottom-color 0.3s; /* Add transition effect for underline */
   display: flex;
   align-items: center;
+  position: relative; /* Position relative for absolutely positioning the additional div */
 
-  &:hover {
-    color: ${COLORS.primary};
+  &:hover > span {
+    color: ${COLORS.primary}; /* Apply hover effect only to the category title */
+    cursor: pointer;
   }
 
   &.active {
     border-bottom: 1px solid ${COLORS.primary}; /* Add underline for active category */
   }
 `;
+
 const IconContainer = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 1.5rem;
   height: 1.5rem;
+`;
+
+const Title = styled.span`
+  flex: 1; /* Allow the title to take up remaining space */
 `;
 
 const EachCategory = ({
@@ -38,9 +46,12 @@ const EachCategory = ({
     <CategoryItem
       key={index}
       className={activeCategory === index ? "active" : ""}
-      onClick={() => handleCategoryClick(index)}
+      isOpen={activeCategory === index}
+      onClick={() => {
+        handleCategoryClick(index);
+      }}
     >
-      {category.title}{" "}
+      <Title>{category.title} </Title>
       <IconContainer>
         {activeCategory === index ? (
           <ChevronUpIcon className="h-4 w-4" /> // Arrow up icon if category is active
@@ -48,6 +59,7 @@ const EachCategory = ({
           <ChevronDownIcon className="h-4 w-4" /> // Arrow down icon if category is not active
         )}
       </IconContainer>
+      {activeCategory === index && <SubCategories Id={category.id} />}
     </CategoryItem>
   );
 };

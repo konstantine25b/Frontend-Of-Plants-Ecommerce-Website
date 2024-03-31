@@ -5,7 +5,7 @@ import {
   SearchIcon,
 } from "@heroicons/react/outline"; // Import specific icon from Heroicons
 import Logo from "./KosaPlants_logo.png"; // Make sure to provide the correct path to your logo image
-import COLORS from "../../styles/Colors";
+import COLORS from "../../../styles/Colors";
 
 // Define a common size for icons
 const iconSize = "1.5rem"; // Converted from 24px to rem assuming 16px base font size

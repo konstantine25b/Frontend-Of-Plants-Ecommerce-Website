@@ -1,11 +1,12 @@
-import axios, { AxiosInstance,  AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 
-interface CategoryData {
+interface SubcategoryData {
+    id: number;
     title: string;
-    description: string;
+    category: number; // Assuming category is identified by its ID
 }
 
-export class CategoryClient {
+export class SubcategoryClient {
     private axiosInstance: AxiosInstance;
 
     constructor(baseUrl: string) {
@@ -14,9 +15,10 @@ export class CategoryClient {
         });
     }
 
-    public async listCategories(): Promise<CategoryData[]> {
+    public async listSubcategories(categoryId?: number): Promise<SubcategoryData[]> {
         try {
-            const response: AxiosResponse<CategoryData[]> = await this.axiosInstance.get('/api/product/categories/');
+            const url = categoryId ? `/api/product/subcategories/?category=${categoryId}` : '/api/product/subcategories/';
+            const response: AxiosResponse<SubcategoryData[]> = await this.axiosInstance.get(url);
             return response.data;
         } catch (error: any) {
             this.handleRequestError(error);
@@ -33,11 +35,10 @@ export class CategoryClient {
         } else {
             console.error('Error setting up the request:', error.message);
         }
-        throw new Error('Failed to fetch categories');
+        throw new Error('Failed to fetch subcategories');
     }
 }
 
-
-// Instantiate CustomerClient
+// Example usage:
 const baseUrl = "http://164.92.170.208";
-export const clientCategory = new CategoryClient(baseUrl);
+export const subcategoryClient = new SubcategoryClient(baseUrl);
