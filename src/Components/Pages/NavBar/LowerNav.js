@@ -28,7 +28,6 @@ const CategoryList = styled.ul`
   justify-content: left;
 `;
 
-
 const NavigationLinks = styled.div`
   display: flex;
   gap: 1rem;
@@ -36,7 +35,7 @@ const NavigationLinks = styled.div`
 `;
 
 const Link = styled.a`
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   color: ${COLORS.text};
   text-transform: uppercase;
@@ -47,8 +46,6 @@ const Link = styled.a`
     color: ${COLORS.primary};
   }
 `;
-
-
 
 const LowerNav = ({ categories }) => {
   const [activeCategory, setActiveCategory] = useState(null);

@@ -92,7 +92,7 @@ const ActionButton = styled.button`
 
   &:hover {
     background-color: ${(props) =>
-      props.primary ? COLORS.primary : "#f5f5f5"}; /* Darken on hover */
+      props.primary ? COLORS.hoverBlue : "#f5f5f5"}; /* Darken on hover */
   }
 `;
 

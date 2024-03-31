@@ -3,7 +3,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 import COLORS from "../../styles/Colors";
 
 const CategoryItem = styled.li`
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: bold;
   color: ${COLORS.text};
   text-transform: uppercase;
@@ -28,9 +28,12 @@ const IconContainer = styled.span`
   height: 1.5rem;
 `;
 
-
-
-const EachCategory = ({activeCategory, handleCategoryClick ,category ,index}) => {
+const EachCategory = ({
+  activeCategory,
+  handleCategoryClick,
+  category,
+  index,
+}) => {
   return (
     <CategoryItem
       key={index}
