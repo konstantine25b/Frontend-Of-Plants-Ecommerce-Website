@@ -6,26 +6,22 @@ import { useNavigate } from "react-router-dom";
 
 const SubcategoryList = styled.ul`
   list-style: none;
+  width: 100%;
   padding: 0;
-  position: absolute;
-  top: 2.5rem;
-  left: 0;
-  width: 15rem;
-  z-index: 1;
-  background-color: ${COLORS.main};
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow */
+  padding-bottom: 0.4rem;
+  border-bottom: 0.1px solid ${COLORS.gray}; /* Add border bottom */
 `;
 
 const SubcategoryItem = styled.li`
-  padding: 0.5rem 1rem; /* Add padding */
-  border-bottom: 0.1px solid ${COLORS.gray}; /* Add border bottom */
+  padding: 0.3rem 0.4rem; /* Add padding */
+  font-size: 0.9rem;
   &:hover {
     color: ${COLORS.hoverBlue};
     cursor: pointer;
   }
 `;
 
-const SubCategories = ({ Id }) => {
+const SubCategoriesToggle = ({ Id }) => {
   const navigate = useNavigate();
 
   const {
@@ -48,7 +44,7 @@ const SubCategories = ({ Id }) => {
               onClick={() =>
                 navigate(`/EachCategory`, {
                   state: {
-                    subcategory : subcategory
+                    subcategory: subcategory,
                   },
                 })
               }
@@ -63,4 +59,4 @@ const SubCategories = ({ Id }) => {
   );
 };
 
-export default SubCategories;
+export default SubCategoriesToggle;

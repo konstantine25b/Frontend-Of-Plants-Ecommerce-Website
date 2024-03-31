@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import LowerNav from "./LowerNav/LowerNav";
 import UpperNavBar from "./UpperNav/UpperNav";
 import { clientCategory } from "../../../Client/products/Categories";
-import { subcategoryClient } from "../../../Client/products/SubCategories";
+
 
 const fetchCategories = async () => {
   try {
@@ -40,7 +40,7 @@ const NavBar = () => {
 
   return (
     <>
-      <UpperNavBar />
+      <UpperNavBar categories={categories?.results}/>
       <LowerNav categories={categories?.results} />
     </>
   );

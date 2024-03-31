@@ -6,9 +6,9 @@ import {
 } from "@heroicons/react/outline"; // Import specific icon from Heroicons
 import Logo from "./KosaPlants_logo.png"; // Make sure to provide the correct path to your logo image
 import COLORS from "../../../styles/Colors";
-
-// Define a common size for icons
-const iconSize = "1.5rem"; // Converted from 24px to rem assuming 16px base font size
+import { MenuIcon } from "@heroicons/react/outline";
+import { useState } from "react";
+import ToggleMenu from "./ToggleMenu";
 
 const Container = styled.div`
   position: fixed;
@@ -30,8 +30,25 @@ const LogoImg = styled.img`
   cursor: pointer; /* Add cursor pointer on hover */
   transition: transform 0.3s; /* Add transition effect */
   margin-left: 0.625rem; /* Converted from 1% to rem */
+
   &:hover {
     transform: scale(1.1); /* Scale up on hover */
+  }
+
+  @media (max-width: 500px) {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    width: 5rem; /* Adjust height for smaller screens */
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 6.5rem; /* Adjust height for medium screens */
+    margin-left: 0.225rem; /* Converted from 1% to rem */
+  }
+
+  @media (min-width: 1025px) {
+    width: 7.5rem; /* Adjust height for large screens */
   }
 `;
 
@@ -40,6 +57,18 @@ const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
   width: 60%;
+
+  @media (max-width: 768px) {
+    width: 50%; /* Adjust height for smaller screens */
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 53%; /* Adjust height for medium screens */
+  }
+
+  @media (min-width: 1025px) {
+    width: 60%; /* Adjust height for large screens */
+  }
 `;
 
 const SearchBar = styled.input`
@@ -65,8 +94,8 @@ const SearchIconContainer = styled.div`
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  width: ${iconSize};
-  height: ${iconSize};
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 const ActionsContainer = styled.div`
@@ -94,11 +123,28 @@ const ActionButton = styled.button`
     background-color: ${(props) =>
       props.primary ? COLORS.hoverBlue : "#f5f5f5"}; /* Darken on hover */
   }
+
+  @media (max-width: 768px) {
+    padding: 0.625rem 0.7rem; /* Converted from 10px 20px to rem */
+    margin-left: 0.125rem; /* Converted from 10px to rem */
+    margin-right: 0.5rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    padding: 0.625rem 1rem; /* Converted from 10px 20px to rem */
+    margin-left: 0.225rem; /* Converted from 10px to rem */
+    margin-right: 0.7rem;
+  }
+
+  @media (min-width: 1025px) {
+    padding: 0.625rem 1.25rem; /* Converted from 10px 20px to rem */
+    margin-left: 0.625rem; /* Converted from 10px to rem */
+  }
 `;
 
 const IconContainer = styled.div`
-  width: ${iconSize};
-  height: ${iconSize};
+  width: 1.5rem;
+  height: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,6 +155,20 @@ const IconContainer = styled.div`
 
   &:hover {
     transform: scale(1.1); /* Scale up on hover */
+  }
+  @media (max-width: 768px) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  @media (min-width: 1025px) {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `;
 
@@ -130,13 +190,31 @@ const ItemCount = styled.span`
   justify-content: center;
   font-size: 1rem;
 `;
+const MenuButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-left: 0.5rem;
+  display: none;
+  @media (max-width: 1024px) {
+    display: block;
+  }
+`;
 
-const UpperNavBar = () => {
+const UpperNavBar = ({ categories }) => {
   // Placeholder for the number of items in the shopping cart
   const itemsInCart = 5;
+  const [showMenu, setShowMenu] = useState(false);
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
     <Container>
+      <MenuButton onClick={toggleMenu}>
+        <MenuIcon width={35} height={35} color={COLORS.text} />
+      </MenuButton>
       <LogoImg src={Logo} alt="KosaPlants Logo" />
       <SearchBarContainer>
         <SearchBar type="text" placeholder="Search KosaPlants..." />
@@ -160,6 +238,7 @@ const UpperNavBar = () => {
           </ShoppingCartIconContainer>
         </ActionButton>
       </ActionsContainer>
+      {showMenu && <ToggleMenu categories={categories} />}
     </Container>
   );
 };
