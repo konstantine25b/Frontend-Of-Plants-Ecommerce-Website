@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import COLORS from "../../../styles/Colors";
 import { useEffect, useRef, useState } from "react";
+import { XIcon } from "@heroicons/react/outline"; // Import XIcon from Heroicons
 import EachCategoryToggle from "./EachCategoryToggle";
 
 const MenuContainer = styled.div`
@@ -14,6 +15,9 @@ const MenuContainer = styled.div`
   z-index: 10;
   border-radius: 1rem;
   box-shadow: 0px 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Adjust the layout */
   @media (max-width: 400px) {
     width: 75%; /* Adjust width for screens up to 400px */
   }
@@ -28,13 +32,26 @@ const MenuContainer = styled.div`
   }
 `;
 
+const CloseButton = styled.button`
+  position: absolute;
+  top: 0.2rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    color: ${COLORS.primary};
+  }
+`;
+
 const CategoryList = styled.ul`
   list-style: none;
   padding: 0;
 `;
 
 const NavigationLinks = styled.div`
-  margin-top: 1.5rem;
+  margin-bottom: 1.5rem; /* Add margin at the bottom */
 `;
 
 const Link = styled.a`
@@ -55,7 +72,7 @@ const Link = styled.a`
   }
 `;
 
-const ToggleMenu = ({ categories }) => {
+const ToggleMenu = ({ categories, setShowMenu }) => {
   const [activeCategory, setActiveCategory] = useState(null);
   const lowerNavRef = useRef(null);
 
@@ -63,6 +80,7 @@ const ToggleMenu = ({ categories }) => {
     const handleClickOutside = (event) => {
       if (lowerNavRef.current && !lowerNavRef.current.contains(event.target)) {
         setActiveCategory(null);
+        setShowMenu(false);
       }
     };
 
@@ -75,8 +93,16 @@ const ToggleMenu = ({ categories }) => {
   const handleCategoryClick = (index) => {
     setActiveCategory(activeCategory === index ? null : index);
   };
+
+  const closeMenu = () => {
+    setShowMenu(false);
+  };
+
   return (
     <MenuContainer ref={lowerNavRef}>
+      <CloseButton onClick={closeMenu}>
+        <XIcon width={25} height={25} color={COLORS.text} />
+      </CloseButton>
       <CategoryList>
         {categories?.map((category, index) => (
           <EachCategoryToggle

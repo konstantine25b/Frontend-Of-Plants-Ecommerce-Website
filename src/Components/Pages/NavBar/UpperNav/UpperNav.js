@@ -238,7 +238,7 @@ const UpperNavBar = ({ categories }) => {
           </ShoppingCartIconContainer>
         </ActionButton>
       </ActionsContainer>
-      {showMenu && <ToggleMenu categories={categories} />}
+      {showMenu && <ToggleMenu setShowMenu={setShowMenu} categories={categories} />}
     </Container>
   );
 };
