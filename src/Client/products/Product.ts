@@ -41,6 +41,7 @@ export class ProductClient {
     },
     prevPage: number = 1
   ): Promise<{ results: ProductData[]; next: string | null }> {
+    console.log(filters)
     if (dataInfo && pageNum != 1) {
       try {
         let result: { results: ProductData[]; next: string | null } = {

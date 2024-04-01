@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import SizeComponent from "./Size";
+import PriceComponent from "./Price";
+
 
 const LeftSideContainer = styled.div`
   display: flex;
@@ -18,12 +20,18 @@ const Title = styled.h2`
   margin-bottom: 1rem;
 `;
 
-const LeftSide = ({setSize ,size}) => {
+const LeftSide = ({ setSize, size, setPrice, price }) => { // Add setPrice as a prop
   const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedPrice, setSelectedPrice] = useState({ min: 0, max: 1000 }); // Initialize selectedPrice state
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
-    setSize(size)
+    setSize(size);
+  };
+
+  const handlePriceChange = (price) => {
+    setSelectedPrice(price);
+    setPrice(price); // Pass selected price to the parent component
   };
 
   return (
@@ -33,7 +41,13 @@ const LeftSide = ({setSize ,size}) => {
         sizes={["XS", "S", "M", "L", "XL", "XXL"]}
         selectedSize={selectedSize}
         onSelectSize={handleSizeChange}
-        size = {size}
+        size={size}
+      />
+      <Title>Choose Price Range:</Title>
+      <PriceComponent
+        price={{ price_gte: selectedPrice.min, price_lte: selectedPrice.max }} // Pass price as an object
+        onChangePrice={handlePriceChange}
+        mainPrice ={price}
       />
     </LeftSideContainer>
   );

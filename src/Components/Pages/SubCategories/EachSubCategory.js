@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import RightSide from "./RightSide/RightSide";
 import { clientProduct } from "../../../Client/products/Product";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import LeftSide from "./LeftSide/LeftSide";
 
@@ -43,6 +43,8 @@ const Component2 = styled.div`
 const fetchSubcategoryData = async (
   id,
   sizeFilter = undefined,
+  price__gte = undefined,
+  price__lte = undefined,
   page = 1,
   dataInfo = [],
   prevPage = 1
@@ -52,6 +54,8 @@ const fetchSubcategoryData = async (
       {
         subcategory: id,
         size: sizeFilter,
+        price__gte: price__gte,
+        price__lte: price__lte,
       },
       page,
       dataInfo,
@@ -70,18 +74,25 @@ const EachSubCategory = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [prevPage, setPrevPage] = useState(1);
   const [size, setSize] = useState();
+  const [price, setPrice] = useState({ price_gte: undefined,
+    price_lte: undefined});
 
   const { data, isLoading, isError, refetch } = useQuery(
-    ["subcategory", subcategory.id, currentPage, size],
+    ["subcategory", subcategory.id, currentPage, size, price],
     () =>
       fetchSubcategoryData(
         subcategory.id,
         size,
+        price.min,
+        price.max,
         currentPage,
         dataInfo,
         prevPage
       )
   );
+  useEffect(()=>{
+console.log(price)
+  },[price])
 
   if (isLoading) {
     return <div></div>;
@@ -94,7 +105,7 @@ const EachSubCategory = () => {
   return (
     <Container>
       <Component1>
-        <LeftSide setSize={setSize} size={size} />
+        <LeftSide setSize={setSize} size={size} setPrice={setPrice} price ={price} />
       </Component1>
       <div></div> {/* Gap */}
       <Component2>
