@@ -5,7 +5,7 @@ const COLORS = {
   fancyBlue: "#4287f5", // Fancy blue color
   hoverBlue:"#3399FF",
   fancyRed: "#f54242", // Fancy red color
-  primary: "gray",
+  primary: "lightgray",
 
 };
 

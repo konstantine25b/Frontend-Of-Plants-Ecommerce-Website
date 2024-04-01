@@ -2,8 +2,9 @@ import { useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import RightSide from "./RightSide/RightSide";
 import { clientProduct } from "../../../Client/products/Product";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import LeftSide from "./LeftSide/LeftSide";
 
 const Container = styled.div`
   display: flex;
@@ -21,9 +22,10 @@ const Container = styled.div`
 `;
 
 const Component1 = styled.div`
-  background-color: #f0f0f0;
   width: 25%;
   padding: 0;
+  display: flex;
+  justify-content: center;
   @media (max-width: 1024px) {
     display: none;
   }
@@ -40,6 +42,7 @@ const Component2 = styled.div`
 
 const fetchSubcategoryData = async (
   id,
+  sizeFilter = undefined,
   page = 1,
   dataInfo = [],
   prevPage = 1
@@ -48,6 +51,7 @@ const fetchSubcategoryData = async (
     const response = await clientProduct.listProducts(
       {
         subcategory: id,
+        size: sizeFilter,
       },
       page,
       dataInfo,
@@ -60,22 +64,28 @@ const fetchSubcategoryData = async (
 };
 
 const EachSubCategory = () => {
-
   const { state } = useLocation();
   const { subcategory } = state;
   const [dataInfo, setDataInfo] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [prevPage, setPrevPage] = useState(1);
+  const [size, setSize] = useState();
 
   const { data, isLoading, isError, refetch } = useQuery(
-    ["subcategory", subcategory.id, currentPage],
-    () => fetchSubcategoryData(subcategory.id, currentPage, dataInfo, prevPage)
+    ["subcategory", subcategory.id, currentPage, size],
+    () =>
+      fetchSubcategoryData(
+        subcategory.id,
+        size,
+        currentPage,
+        dataInfo,
+        prevPage
+      )
   );
 
 
-
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   if (isError) {
@@ -84,7 +94,9 @@ const EachSubCategory = () => {
 
   return (
     <Container>
-      <Component1>Component 1 (30%)</Component1>
+      <Component1>
+        <LeftSide setSize={setSize} />
+      </Component1>
       <div></div> {/* Gap */}
       <Component2>
         <RightSide

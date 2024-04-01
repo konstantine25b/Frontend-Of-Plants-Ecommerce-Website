@@ -17,6 +17,7 @@ interface ProductFilters {
   minPrice?: number;
   maxPrice?: number;
   isFeatured?: boolean;
+  size?: string;
 }
 
 export class ProductClient {
