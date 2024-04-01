@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import COLORS from "../../../styles/Colors";
 
@@ -31,7 +32,7 @@ const SizeButton = styled.button`
   }
 `;
 
-const SizeComponent = ({ sizes, selectedSize, onSelectSize }) => {
+const SizeComponent = ({ sizes, selectedSize, onSelectSize, size }) => {
   const handleSizeClick = (size) => {
     if (selectedSize === size) {
       // If the clicked size is already selected, unselect it
@@ -42,15 +43,22 @@ const SizeComponent = ({ sizes, selectedSize, onSelectSize }) => {
     }
   };
 
+  useEffect(() => {
+    // Check if the size prop has changed and it's a valid size
+    if (size && sizes.includes(size) && size !== selectedSize) {
+      onSelectSize(size);
+    }
+  }, [size, sizes, selectedSize, onSelectSize]);
+
   return (
     <SizeContainer>
-      {sizes.map((size) => (
+      {sizes.map((sizeOption) => (
         <SizeButton
-          key={size}
-          selected={selectedSize === size}
-          onClick={() => handleSizeClick(size)} // Call handleSizeClick instead of directly calling onSelectSize
+          key={sizeOption}
+          selected={selectedSize === sizeOption}
+          onClick={() => handleSizeClick(sizeOption)}
         >
-          {size}
+          {sizeOption}
         </SizeButton>
       ))}
     </SizeContainer>

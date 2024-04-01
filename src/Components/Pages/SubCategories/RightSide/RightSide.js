@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 import COLORS from "../../../styles/Colors";
 import EachProduct from "./EachProduct";
-import { clientProduct } from "../../../../Client/products/Product";
-import { useQuery } from "react-query";
-import { useState } from "react";
 
 const RightSideContainer = styled.div`
   width: 100%;
@@ -60,27 +57,6 @@ const PageNumber = styled.span`
   }
 `;
 
-const fetchSubcategoryData = async (
-  id,
-  page = 1,
-  dataInfo = [],
-  prevPage = 1
-) => {
-  try {
-    const response = await clientProduct.listProducts(
-      {
-        subcategory: id,
-      },
-      page,
-      dataInfo,
-      prevPage
-    );
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
-
 const RightSide = ({
   setDataInfo,
   currentPage,
@@ -89,7 +65,7 @@ const RightSide = ({
   data,
 }) => {
   const handleNextPage = () => {
-    if (data.count / 20 > currentPage) {
+    if (data?.count / 20 > currentPage) {
       setDataInfo(data);
       setPrevPage(currentPage);
       setCurrentPage((prevPage) => prevPage + 1);
@@ -113,7 +89,7 @@ const RightSide = ({
   };
 
   // Calculate total number of pages
-  const totalPages = Math.ceil(data.count / 20);
+  const totalPages = Math.ceil(data?.count / 20);
   // Generate an array of page numbers
   let pageNumbers = [];
   if (totalPages <= 3) {

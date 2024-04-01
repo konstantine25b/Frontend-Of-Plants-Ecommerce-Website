@@ -13,10 +13,11 @@ interface ProductData {
 }
 
 interface ProductFilters {
-  category?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  isFeatured?: boolean;
+  subcategory?: string;
+  price__gte?: number;
+  price__lte?: number;
+  is_featured?: boolean;
+  is_active?: boolean;
   size?: string;
 }
 
@@ -97,8 +98,10 @@ export class ProductClient {
           });
 
           // Append the constructed query parameters to the URL
+
           url += `?${queryParams.toString()}`;
         }
+        console.log(url);
 
         const response: AxiosResponse<{
           results: ProductData[];

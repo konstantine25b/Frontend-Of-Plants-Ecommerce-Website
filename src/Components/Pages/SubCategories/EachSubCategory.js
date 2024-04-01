@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 import RightSide from "./RightSide/RightSide";
 import { clientProduct } from "../../../Client/products/Product";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import LeftSide from "./LeftSide/LeftSide";
 
@@ -83,7 +83,6 @@ const EachSubCategory = () => {
       )
   );
 
-
   if (isLoading) {
     return <div></div>;
   }
@@ -95,7 +94,7 @@ const EachSubCategory = () => {
   return (
     <Container>
       <Component1>
-        <LeftSide setSize={setSize} />
+        <LeftSide setSize={setSize} size={size} />
       </Component1>
       <div></div> {/* Gap */}
       <Component2>

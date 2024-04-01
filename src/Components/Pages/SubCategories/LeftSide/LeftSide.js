@@ -18,13 +18,12 @@ const Title = styled.h2`
   margin-bottom: 1rem;
 `;
 
-const LeftSide = ({setSize}) => {
+const LeftSide = ({setSize ,size}) => {
   const [selectedSize, setSelectedSize] = useState(null);
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
     setSize(size)
-    console.log("Selected size:", size);
   };
 
   return (
@@ -34,6 +33,7 @@ const LeftSide = ({setSize}) => {
         sizes={["XS", "S", "M", "L", "XL", "XXL"]}
         selectedSize={selectedSize}
         onSelectSize={handleSizeChange}
+        size = {size}
       />
     </LeftSideContainer>
   );
