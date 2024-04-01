@@ -70,8 +70,7 @@ const fetchSubcategoryData = async (
     const response = await clientProduct.listProducts(
       {
         subcategory: id,
-        
-      }, 
+      },
       page,
       dataInfo,
       prevPage
@@ -82,16 +81,13 @@ const fetchSubcategoryData = async (
   }
 };
 
-const RightSide = ({ subcategory }) => {
-  const [dataInfo, setDataInfo] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [prevPage, setPrevPage] = useState(1);
-
-  const { data, isLoading, isError, refetch } = useQuery(
-    ["subcategory", subcategory.id, currentPage],
-    () => fetchSubcategoryData(subcategory.id, currentPage, dataInfo, prevPage)
-  );
-
+const RightSide = ({
+  setDataInfo,
+  currentPage,
+  setCurrentPage,
+  setPrevPage,
+  data,
+}) => {
   const handleNextPage = () => {
     if (data.count / 20 > currentPage) {
       setDataInfo(data);
@@ -113,17 +109,8 @@ const RightSide = ({ subcategory }) => {
       setDataInfo(data);
       setPrevPage(currentPage);
       setCurrentPage(pageNumber);
-      // Calculate the nextUrl for the selected page
     }
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error fetching subcategory data</div>;
-  }
 
   // Calculate total number of pages
   const totalPages = Math.ceil(data.count / 20);

@@ -37,8 +37,8 @@ const ProductImage = styled.img`
 `;
 
 const truncateDescription = (description) => {
-  if (description.length > 100) {
-    return description.substring(0, 100) + "...";
+  if (description.length > 50) {
+    return description.substring(0, 50) + "...";
   }
   return description;
 };
@@ -49,9 +49,9 @@ const EachProduct = ({ product }) => {
   return (
     <ProductItem>
       <ProductTitle>{product.title}</ProductTitle>
-      <p>Price: {product.price} $</p>
       <ProductImage src={product.image_url} alt={product.title} />
       <ProductDescription>{truncatedDescription}</ProductDescription>
+      <p>Price: {product.price} $</p>
     </ProductItem>
   );
 };
