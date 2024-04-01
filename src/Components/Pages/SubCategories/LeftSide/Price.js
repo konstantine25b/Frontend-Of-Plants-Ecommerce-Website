@@ -33,15 +33,22 @@ const Thumb = styled.div`
 
 const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
   const [value, setValue] = useState({
-    min: mainPrice.min,
-    max: mainPrice.max,
+    min: price.price_gte,
+    max: price.price_lte,
   });
 
   useEffect(() => {
-    setValue({
-      min: mainPrice.min,
-      max: mainPrice.max,
-    });
+    
+    if (
+      mainPrice.min != undefined ||
+      mainPrice.max!= undefined
+    ) {
+      
+      setValue({
+        min: mainPrice.min,
+        max: mainPrice.max,
+      });
+    }
   }, [mainPrice]);
 
   const handlePriceChange = (newValue) => {

@@ -74,8 +74,10 @@ const EachSubCategory = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [prevPage, setPrevPage] = useState(1);
   const [size, setSize] = useState();
-  const [price, setPrice] = useState({ price_gte: undefined,
-    price_lte: undefined});
+  const [price, setPrice] = useState({
+    price_gte: undefined,
+    price_lte: undefined,
+  });
 
   const { data, isLoading, isError, refetch } = useQuery(
     ["subcategory", subcategory.id, currentPage, size, price],
@@ -90,9 +92,11 @@ const EachSubCategory = () => {
         prevPage
       )
   );
-  useEffect(()=>{
-console.log(price)
-  },[price])
+  useEffect(() => {
+    // Reset price to default when subcategory changes
+    setSize();
+    setPrice({ price_gte: undefined, price_lte: undefined });
+  }, [subcategory]);
 
   if (isLoading) {
     return <div></div>;
@@ -105,7 +109,12 @@ console.log(price)
   return (
     <Container>
       <Component1>
-        <LeftSide setSize={setSize} size={size} setPrice={setPrice} price ={price} />
+        <LeftSide
+          setSize={setSize}
+          size={size}
+          setPrice={setPrice}
+          price={price}
+        />
       </Component1>
       <div></div> {/* Gap */}
       <Component2>
