@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 import COLORS from "../../../styles/Colors";
 import EachCategory from "./EachCategory";
 
-
 const Container = styled.div`
   position: fixed;
   top: 4.25rem;
+  z-index: 20;
   width: 100%;
   left: 0;
   display: flex;

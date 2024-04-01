@@ -29,35 +29,61 @@ export class ProductClient {
   }
 
   public async listProducts(
-    filters?: ProductFilters
+    filters?: ProductFilters,
+    nextUrl?: string | null,
+    pageNum: number = 1
   ): Promise<{ results: ProductData[]; next: string | null }> {
-    let url: string = "/api/product/products/";
+    if (nextUrl) {
+      try {
+        let result: { results: ProductData[]; next: string | null } = { results: [], next: null };
 
-    try {
-      // Append filters as query parameters if they exist
-      if (filters) {
-        const queryParams = new URLSearchParams();
-
-        // Iterate through each filter and append them to the query parameters
-        Object.entries(filters).forEach(([key, value]) => {
-          if (value !== undefined && value !== null) {
-            queryParams.append(key, String(value)); // Convert value to string
+        let updatedNextUrl: string | null = nextUrl;
+        for (let i = 0; i < pageNum; i++) {
+          const response: AxiosResponse<{
+            results: ProductData[];
+            next: string | null;
+          }> = await this.axiosInstance.get(updatedNextUrl);
+          result = response.data
+          updatedNextUrl = response.data.next;
+          if (!updatedNextUrl) {
+            break;
           }
-        });
+        }
 
-        // Append the constructed query parameters to the URL
-        url += `?${queryParams.toString()}`;
+        return result; // Return the entire data object from the response
+      } catch (error: any) {
+        this.handleRequestError(error);
+        return { results: [], next:nextUrl  }; // Return an empty object in case of error
       }
-     
-      const response: AxiosResponse<{
-        results: ProductData[];
-        next: string | null;
-      }> = await this.axiosInstance.get(url);
+    } else {
+      let url: string = "/api/product/products/";
 
-      return response.data; // Return the entire data object from the response
-    } catch (error: any) {
-      this.handleRequestError(error);
-      return { results: [], next: null }; // Return an empty object in case of error
+      try {
+        // Append filters as query parameters if they exist
+        if (filters) {
+          const queryParams = new URLSearchParams();
+
+          // Iterate through each filter and append them to the query parameters
+          Object.entries(filters).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+              queryParams.append(key, String(value)); // Convert value to string
+            }
+          });
+
+          // Append the constructed query parameters to the URL
+          url += `?${queryParams.toString()}`;
+        }
+
+        const response: AxiosResponse<{
+          results: ProductData[];
+          next: string | null;
+        }> = await this.axiosInstance.get(url);
+
+        return response.data; // Return the entire data object from the response
+      } catch (error: any) {
+        this.handleRequestError(error);
+        return { results: [], next: null }; // Return an empty object in case of error
+      }
     }
   }
 

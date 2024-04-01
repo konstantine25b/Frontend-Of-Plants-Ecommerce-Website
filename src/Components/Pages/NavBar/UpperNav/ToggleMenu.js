@@ -80,7 +80,7 @@ const ToggleMenu = ({ categories, setShowMenu }) => {
     const handleClickOutside = (event) => {
       if (lowerNavRef.current && !lowerNavRef.current.contains(event.target)) {
         setActiveCategory(null);
-        setShowMenu(false);
+        
       }
     };
 

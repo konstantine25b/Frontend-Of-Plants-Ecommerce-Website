@@ -17,6 +17,7 @@ const Container = styled.div`
   width: 100%;
   height: 3rem;
   display: flex;
+  z-index: 20;
   justify-content: space-between;
   align-items: center;
   padding: 0.625rem; /* Converted from 10px to rem */

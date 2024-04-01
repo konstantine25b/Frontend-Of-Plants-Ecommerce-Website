@@ -6,12 +6,12 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Root from "./Root";
-import EachSubCategory from "./Components/Pages/Categories/EachSubCategory";
+import EachSubCategory from "./Components/Pages/SubCategories/EachSubCategory";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route path="/EachCategory" element={<EachSubCategory />}/>
+      <Route path="/EachCategory" element={<EachSubCategory />} />
     </Route>
   )
 );
