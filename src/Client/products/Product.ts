@@ -30,30 +30,55 @@ export class ProductClient {
 
   public async listProducts(
     filters?: ProductFilters,
-    nextUrl?: string | null,
-    pageNum: number = 1
+    pageNum: number = 1,
+    dataInfo?: {
+      previous: string | null;
+      results: ProductData[];
+      next: string | null;
+      count: number;
+    },
+    prevPage: number = 1
   ): Promise<{ results: ProductData[]; next: string | null }> {
-    if (nextUrl) {
+    if (dataInfo && pageNum != 1) {
       try {
-        let result: { results: ProductData[]; next: string | null } = { results: [], next: null };
-
-        let updatedNextUrl: string | null = nextUrl;
-        for (let i = 0; i < pageNum; i++) {
-          const response: AxiosResponse<{
-            results: ProductData[];
-            next: string | null;
-          }> = await this.axiosInstance.get(updatedNextUrl);
-          result = response.data
-          updatedNextUrl = response.data.next;
-          if (!updatedNextUrl) {
-            break;
+        let result: { results: ProductData[]; next: string | null } = {
+          results: [],
+          next: null,
+        };
+        if (pageNum > prevPage) {
+          let updatedNextUrl: string | null = dataInfo.next;
+          for (let i = prevPage; i < pageNum; i++) {
+            const response: AxiosResponse<{
+              results: ProductData[];
+              next: string | null;
+            }> = await this.axiosInstance.get(updatedNextUrl!); // Add the non-null assertion operator here
+            result = response.data;
+            updatedNextUrl = response.data.next;
+            if (!updatedNextUrl) {
+              break; // Exit the loop if there are no more pages
+            }
+          }
+        } else {
+          let updatedPrevUrl: string | null = dataInfo.previous;
+          for (let i = pageNum; i < prevPage; i++) {
+            const response: AxiosResponse<{
+              results: ProductData[];
+              next: string | null;
+              previous: string | null;
+              count: number;
+            }> = await this.axiosInstance.get(updatedPrevUrl!); // Add the non-null assertion operator here
+            result = response.data;
+            updatedPrevUrl = response.data.previous;
+            if (!updatedPrevUrl) {
+              break; // Exit the loop if there are no more pages
+            }
           }
         }
 
         return result; // Return the entire data object from the response
       } catch (error: any) {
         this.handleRequestError(error);
-        return { results: [], next:nextUrl  }; // Return an empty object in case of error
+        return { results: [], next: dataInfo.next }; // Return an empty object in case of error
       }
     } else {
       let url: string = "/api/product/products/";
