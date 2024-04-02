@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Slider from "react-slider";
 import styled from "@emotion/styled";
 import COLORS from "../../../styles/Colors";
@@ -8,9 +8,8 @@ const PriceContainer = styled.div`
 `;
 
 const Track = styled.div`
-  background-color: ${({ isDragging }) =>
-    isDragging ? COLORS.fancyBlue : COLORS.lightGray};
-  height: 8px;
+  background-color: ${COLORS.primary};
+  height: 1px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 `;
@@ -18,17 +17,27 @@ const Track = styled.div`
 const Thumb = styled.div`
   height: 20px;
   width: 20px;
-  margin-top: -7px;
+  margin-top: -13px;
   border: 2px solid
-    ${({ isDragging }) => (isDragging ? COLORS.hoverBlue : COLORS.primary)};
+    ${({ isDragging }) => (isDragging ? COLORS.hoverBlue : COLORS.gray)};
   background-color: ${({ isDragging }) =>
-    isDragging ? COLORS.fancyBlue : COLORS.white};
+    isDragging ? COLORS.fancyBlue : COLORS.primary};
   box-shadow: ${({ isDragging }) =>
     isDragging
       ? "0px 2px 6px rgba(0, 0, 0, 0.3)"
       : "0px 2px 6px rgba(0, 0, 0, 0.1)"};
   transition: border-color 0.3s ease, background-color 0.3s ease,
     box-shadow 0.3s ease;
+  border-radius: 50%; /* Round the thumb */
+  cursor: grab; /* Change cursor on hover */
+`;
+
+const PriceText = styled.div`
+  display: flex;
+  justify-content: space-between;
+  color: ${COLORS.gray};
+  margin-top: 1rem;
+  font-size: 14px; /* Adjust font size */
 `;
 
 const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
@@ -38,12 +47,7 @@ const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
   });
 
   useEffect(() => {
-    
-    if (
-      mainPrice.min != undefined ||
-      mainPrice.max!= undefined
-    ) {
-      
+    if (mainPrice.min !== undefined || mainPrice.max !== undefined) {
       setValue({
         min: mainPrice.min,
         max: mainPrice.max,
@@ -68,22 +72,19 @@ const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
         onChange={handlePriceChange}
         onAfterChange={handlePriceFinalChange}
         renderTrack={({ props, state }) => (
-          <Track {...props} isDragging={state && state.dragging} />
+          <Track
+            {...props}
+            isDragging={state && state.dragging && state.index === 0}
+          />
         )}
         renderThumb={(props, state) => (
           <Thumb {...props} isDragging={state && state.dragging} />
         )}
       />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: "10px",
-        }}
-      >
+      <PriceText>
         <span>${value.min}</span>
         <span>${value.max}</span>
-      </div>
+      </PriceText>
     </PriceContainer>
   );
 };

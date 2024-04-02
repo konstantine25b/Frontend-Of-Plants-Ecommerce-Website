@@ -6,6 +6,7 @@ const COLORS = {
   hoverBlue:"#3399FF",
   fancyRed: "#f54242", // Fancy red color
   primary: "lightgray",
+  gray:"gray"
 
 };
 
