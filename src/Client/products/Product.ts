@@ -41,7 +41,7 @@ export class ProductClient {
     },
     prevPage: number = 1
   ): Promise<{ results: ProductData[]; next: string | null }> {
-    console.log(filters)
+    console.log(filters);
     if (dataInfo && pageNum != 1) {
       try {
         let result: { results: ProductData[]; next: string | null } = {
@@ -114,6 +114,20 @@ export class ProductClient {
         this.handleRequestError(error);
         return { results: [], next: null }; // Return an empty object in case of error
       }
+    }
+  }
+
+  public async getProduct(productId: number): Promise<ProductData | null> {
+    const url = `/api/product/products/${productId}/`;
+
+    try {
+      const response: AxiosResponse<ProductData> = await this.axiosInstance.get(
+        url
+      );
+      return response.data;
+    } catch (error: any) {
+      this.handleRequestError(error);
+      return null;
     }
   }
 
