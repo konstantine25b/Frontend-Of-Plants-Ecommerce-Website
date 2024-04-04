@@ -22,7 +22,7 @@ const Title = styled.h2`
 
 const LeftSide = ({ setSize, size, setPrice, price }) => { // Add setPrice as a prop
   const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState({ min: 0, max: 1000 }); // Initialize selectedPrice state
+  const [selectedPrice, setSelectedPrice] = useState({ min: 0, max: 300 }); // Initialize selectedPrice state
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);

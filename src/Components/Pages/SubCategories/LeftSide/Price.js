@@ -67,7 +67,7 @@ const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
     <PriceContainer>
       <Slider
         min={0}
-        max={1000}
+        max={300}
         value={[value.min, value.max]}
         onChange={handlePriceChange}
         onAfterChange={handlePriceFinalChange}

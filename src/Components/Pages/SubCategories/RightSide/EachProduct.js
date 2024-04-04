@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import COLORS from "../../../styles/Colors";
+import { useNavigate } from "react-router-dom";
 
 const ProductItem = styled.li`
   border: 1px solid ${COLORS.borderGray};
@@ -44,10 +45,20 @@ const truncateDescription = (description) => {
 };
 
 const EachProduct = ({ product }) => {
+  const navigate = useNavigate();
+
   const truncatedDescription = truncateDescription(product.description);
 
   return (
-    <ProductItem>
+    <ProductItem
+      onClick={() =>
+        navigate(`/EachProduct`, {
+          state: {
+            product: product,
+          },
+        })
+      }
+    >
       <ProductTitle>{product.title}</ProductTitle>
       <ProductImage src={product.image_url} alt={product.title} />
       <ProductDescription>{truncatedDescription}</ProductDescription>
