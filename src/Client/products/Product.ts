@@ -124,6 +124,7 @@ export class ProductClient {
       const response: AxiosResponse<ProductData> = await this.axiosInstance.get(
         url
       );
+     
       return response.data;
     } catch (error: any) {
       this.handleRequestError(error);
