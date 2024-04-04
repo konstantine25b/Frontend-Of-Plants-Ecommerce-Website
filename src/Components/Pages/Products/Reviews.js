@@ -66,19 +66,22 @@ const generateStarIcons = (rating) => {
 const ReviewsSection = ({ reviews }) => {
   return (
     <ReviewsContainer>
-      {reviews.map((review) => (
-        <ReviewItem key={review.id}>
-          <ReviewHeader>
-            <UserName>{review.user}</UserName>
-            <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
-          </ReviewHeader>
-          <StarRating>
-            {generateStarIcons(review.rating)}
-            <span>({review.rating.toFixed(1)})</span>
-          </StarRating>
-          <ReviewContent>{review.comment}</ReviewContent>
-        </ReviewItem>
-      ))}
+      {reviews.map((review) => {
+        return (
+
+          <ReviewItem key={review.id}>
+            <ReviewHeader>
+              <UserName>{review.username}</UserName>
+              <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
+            </ReviewHeader>
+            <StarRating>
+              {generateStarIcons(review.rating)}
+              <span>({review.rating.toFixed(1)})</span>
+            </StarRating>
+            <ReviewContent>{review.comment}</ReviewContent>
+          </ReviewItem>
+        );
+      })}
     </ReviewsContainer>
   );
 };
