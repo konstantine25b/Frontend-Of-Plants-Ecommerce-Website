@@ -19,19 +19,38 @@ export class ReviewClient {
         });
     }
 
-    public async listReviews(): Promise<ReviewData[]> {
+    public async listReviews(filters?: { [key: string]: string | number | boolean }): Promise<ReviewData[]> {
+        let url = "/api/review/reviews/";
+    
         try {
-            const response: AxiosResponse<ReviewData[]> = await this.axiosInstance.get("/api/reviews/");
+            // Append filters as query parameters if they exist
+            if (filters) {
+                const queryParams = new URLSearchParams();
+    
+                // Iterate through each filter and append them to the query parameters
+                Object.entries(filters).forEach(([key, value]) => {
+                    if (value !== undefined && value !== null) {
+                        queryParams.append(key, String(value)); // Convert value to string
+                    }
+                });
+    
+                // Append the constructed query parameters to the URL
+                url += `?${queryParams.toString()}`;
+            }
+    
+            const response: AxiosResponse<ReviewData[]> = await this.axiosInstance.get(url);
             return response.data;
         } catch (error: any) {
             this.handleRequestError(error);
             return [];
         }
     }
-
+    
     public async getReview(reviewId: number): Promise<ReviewData | null> {
+
+        const url = `api/review/reviews/${reviewId}/`
         try {
-            const response: AxiosResponse<ReviewData> = await this.axiosInstance.get(`/api/reviews/${reviewId}/`);
+            const response: AxiosResponse<ReviewData> = await this.axiosInstance.get(url);
             return response.data;
         } catch (error: any) {
             this.handleRequestError(error);
@@ -56,4 +75,4 @@ export class ReviewClient {
 
 // Example usage:
 const baseUrl = "http://164.92.170.208";
-export const reviewClient = new ReviewClient(baseUrl);
+export const clientReview= new ReviewClient(baseUrl);

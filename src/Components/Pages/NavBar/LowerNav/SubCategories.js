@@ -43,20 +43,22 @@ const SubCategories = ({ Id }) => {
       {isError && <div>Error: {error.message}</div>}
       {subcategories && (
         <SubcategoryList>
-          {subcategories.results?.map((subcategory) => (
-            <SubcategoryItem
-              onClick={() =>
-                navigate(`/EachCategory`, {
-                  state: {
-                    subcategory : subcategory
-                  },
-                })
-              }
-              key={subcategory.id}
-            >
-              {subcategory.title}
-            </SubcategoryItem>
-          ))}
+          {subcategories.results?.map((subcategory, index) => {
+            return (
+              <SubcategoryItem
+                key={index}
+                onClick={() =>
+                  navigate(`/EachCategory`, {
+                    state: {
+                      subcategory: subcategory,
+                    },
+                  })
+                }
+              >
+                {subcategory.title}
+              </SubcategoryItem>
+            );
+          })}
         </SubcategoryList>
       )}
     </div>

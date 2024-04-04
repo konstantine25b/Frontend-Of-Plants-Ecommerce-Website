@@ -66,8 +66,9 @@ const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
   return (
     <PriceContainer>
       <Slider
+        key="slider" // Add key to the Slider component
         min={0}
-        max={300}
+        max={100}
         value={[value.min, value.max]}
         onChange={handlePriceChange}
         onAfterChange={handlePriceFinalChange}
@@ -81,7 +82,9 @@ const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
           <Thumb {...props} isDragging={state && state.dragging} />
         )}
       />
-      <PriceText>
+      <PriceText key="priceText">
+        {" "}
+        {/* Add key to the PriceText component */}
         <span>${value.min}</span>
         <span>${value.max}</span>
       </PriceText>

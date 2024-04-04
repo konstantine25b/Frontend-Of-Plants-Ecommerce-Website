@@ -52,9 +52,9 @@ const SizeComponent = ({ sizes, selectedSize, onSelectSize, size }) => {
 
   return (
     <SizeContainer>
-      {sizes.map((sizeOption) => (
+      {sizes.map((sizeOption,index) => (
         <SizeButton
-          key={sizeOption}
+          key={index}
           selected={selectedSize === sizeOption}
           onClick={() => handleSizeClick(sizeOption)}
         >

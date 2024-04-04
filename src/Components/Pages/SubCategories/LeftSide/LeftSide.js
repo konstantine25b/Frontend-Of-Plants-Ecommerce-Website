@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import SizeComponent from "./Size";
 import PriceComponent from "./Price";
 
-
 const LeftSideContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,9 +19,10 @@ const Title = styled.h2`
   margin-bottom: 1rem;
 `;
 
-const LeftSide = ({ setSize, size, setPrice, price }) => { // Add setPrice as a prop
+const LeftSide = ({ setSize, size, setPrice, price }) => {
+  // Add setPrice as a prop
   const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedPrice, setSelectedPrice] = useState({ min: 0, max: 300 }); // Initialize selectedPrice state
+  const [selectedPrice, setSelectedPrice] = useState({ min: 0, max: 100 }); // Initialize selectedPrice state
 
   const handleSizeChange = (size) => {
     setSelectedSize(size);
@@ -47,7 +47,7 @@ const LeftSide = ({ setSize, size, setPrice, price }) => { // Add setPrice as a 
       <PriceComponent
         price={{ price_gte: selectedPrice.min, price_lte: selectedPrice.max }} // Pass price as an object
         onChangePrice={handlePriceChange}
-        mainPrice ={price}
+        mainPrice={price}
       />
     </LeftSideContainer>
   );
