@@ -31,7 +31,7 @@ const PaginationButton = styled.button`
   font-weight: bold;
   border: none;
   border-radius: 0.25rem;
-  background-color: ${COLORS.primary};
+  background-color: ${COLORS.gray};
   color: ${COLORS.white};
   cursor: pointer;
   transition: background-color 0.3s ease;

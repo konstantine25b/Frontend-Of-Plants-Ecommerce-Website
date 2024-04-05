@@ -9,6 +9,7 @@ import COLORS from "../../../styles/Colors";
 import { MenuIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import ToggleMenu from "./ToggleMenu";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   position: fixed;
@@ -210,13 +211,18 @@ const UpperNavBar = ({ categories }) => {
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+  const navigate = useNavigate();
 
   return (
     <Container>
       <MenuButton onClick={toggleMenu}>
         <MenuIcon width={35} height={35} color={COLORS.text} />
       </MenuButton>
-      <LogoImg src={Logo} alt="KosaPlants Logo" />
+      <LogoImg
+        onClick={() => navigate(`/Home`)}
+        src={Logo}
+        alt="KosaPlants Logo"
+      />
       <SearchBarContainer>
         <SearchBar type="text" placeholder="Search KosaPlants..." />
         <SearchIconContainer>
@@ -239,7 +245,9 @@ const UpperNavBar = ({ categories }) => {
           </ShoppingCartIconContainer>
         </ActionButton>
       </ActionsContainer>
-      {showMenu && <ToggleMenu setShowMenu={setShowMenu} categories={categories} />}
+      {showMenu && (
+        <ToggleMenu setShowMenu={setShowMenu} categories={categories} />
+      )}
     </Container>
   );
 };
