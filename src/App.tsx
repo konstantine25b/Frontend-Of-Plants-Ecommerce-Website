@@ -11,6 +11,7 @@ import Product from "./Components/Pages/Products/Product";
 import Home from "./Components/Pages/Home/Home";
 import AllFeatured from "./Components/Pages/AllFeatured/AllFeatured";
 import AllProductsPage from "./Components/Pages/AllProductsPage/AllProductsPage";
+import LastItems from "./Components/Pages/LastItems.js/LastItems";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       <Route path="/EachProduct" element={<Product />} />
       <Route path="/AllFeatured" element={<AllFeatured />} />
       <Route path="/AllProducts" element={<AllProductsPage />} />
+      <Route path="/LastItems" element={<LastItems />} />
     </Route>
   )
 );
