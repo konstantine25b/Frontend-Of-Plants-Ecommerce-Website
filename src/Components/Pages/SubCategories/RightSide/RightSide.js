@@ -113,7 +113,7 @@ const RightSide = ({
       <div>
         <p>
           Showing {(currentPage - 1) * 20 + 1}-
-          {currentPage * 20 < data.count ? currentPage * 20 : data?.count} of{" "}
+          {currentPage * 20 < data?.count ? currentPage * 20 : data?.count} of{" "}
           {data?.count} results
         </p>
       </div>

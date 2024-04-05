@@ -1,6 +1,10 @@
+import { useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/outline";
 import styled from "@emotion/styled";
 import COLORS from "../../../../styles/Colors";
+import { clientProduct } from "../../../../../Client/products/Product";
+import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = styled.input`
   width: 100%;
@@ -28,7 +32,8 @@ const SearchIconContainer = styled.div`
   width: 1.5rem;
   height: 1.5rem;
 `;
-const SearchBarContainer = styled.div`
+
+const SearchBarContainer = styled.form`
   position: relative;
   display: flex;
   align-items: center;
@@ -47,13 +52,83 @@ const SearchBarContainer = styled.div`
   }
 `;
 
+const fetchData = async (
+  title = undefined,
+  sizeFilter = undefined,
+  price__gte = undefined,
+  price__lte = undefined,
+  page = 1,
+  dataInfo = [],
+  prevPage = 1
+) => {
+  try {
+    const response = await clientProduct.listProducts(
+      {
+        title: title,
+        size: sizeFilter,
+        price__gte: price__gte,
+        price__lte: price__lte,
+      },
+      page,
+      dataInfo,
+      prevPage
+    );
+    return response;
+  } catch (error) {
+    throw new Error("Failed to fetch subcategory data");
+  }
+};
+
 const Search = () => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [size, setSize] = useState();
+  const [price, setPrice] = useState({
+    price_gte: undefined,
+    price_lte: undefined,
+  });
+  const { data, refetch } = useQuery(
+    ["searchedProducts", currentPage, size, price],
+    () => fetchData(searchTerm),
+    { enabled: false }
+  );
+
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent form submission
+    refetch(); // Refresh data
+    navigate(`/SearchPage`, {
+      state: {
+        title: searchTerm,
+      },
+    });
+  };
+
   return (
-    <SearchBarContainer>
-      <SearchBar type="text" placeholder="Search KosaPlants..." />
-      <SearchIconContainer>
+    <SearchBarContainer onSubmit={handleSubmit}>
+      <SearchBar
+        type="text"
+        placeholder="Search KosaPlants..."
+        value={searchTerm}
+        onChange={handleInputChange}
+      />
+      <SearchIconContainer onClick={handleSubmit}>
         <SearchIcon />
       </SearchIconContainer>
+      {/* Display search results here */}
+      {data &&
+        Array.isArray(data) &&
+        data.map((product) => (
+          <div key={product.id}>
+            <p>{product.title}</p>
+          </div>
+        ))}
     </SearchBarContainer>
   );
 };

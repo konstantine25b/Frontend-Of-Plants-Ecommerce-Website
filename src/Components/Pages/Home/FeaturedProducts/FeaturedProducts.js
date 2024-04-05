@@ -63,7 +63,7 @@ const FeaturedProducts = () => {
     ["featuredProducts"],
     fetchSubcategoryData
   );
-  console.log(data, "featured")
+  
 
   useEffect(() => {
     const handleResize = () => {

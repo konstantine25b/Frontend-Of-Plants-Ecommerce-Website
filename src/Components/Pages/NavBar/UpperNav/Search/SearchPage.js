@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { clientProduct } from "../../../Client/products/Product";
-import RightSide from "../SubCategories/RightSide/RightSide";
-import LeftSide from "../SubCategories/LeftSide/LeftSide";
+import { clientProduct } from "../../../../../Client/products/Product";
+import RightSide from "../../../SubCategories/RightSide/RightSide";
+import LeftSide from "../../../SubCategories/LeftSide/LeftSide";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ const Component2 = styled.div`
 `;
 
 const fetchData = async (
-  is_featured = true,
+  title = undefined,
   sizeFilter = undefined,
   price__gte = undefined,
   price__lte = undefined,
@@ -51,7 +52,7 @@ const fetchData = async (
   try {
     const response = await clientProduct.listProducts(
       {
-        is_featured: is_featured,
+        title: title,
         size: sizeFilter,
         price__gte: price__gte,
         price__lte: price__lte,
@@ -66,7 +67,10 @@ const fetchData = async (
   }
 };
 
-const AllFeatured = () => {
+const SearchPage = () => {
+  const { state } = useLocation();
+  const { title } = state;
+
   const [dataInfo, setDataInfo] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [prevPage, setPrevPage] = useState(1);
@@ -77,10 +81,10 @@ const AllFeatured = () => {
   });
 
   const { data, isLoading, isError, refetch } = useQuery(
-    ["featuredProducts", currentPage, size, price],
+    ["searchedProducts", currentPage, size, price],
     () =>
       fetchData(
-        true,
+        title,
         size,
         price.min,
         price.max,
@@ -123,4 +127,4 @@ const AllFeatured = () => {
   );
 };
 
-export default AllFeatured;
+export default SearchPage;

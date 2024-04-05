@@ -42,8 +42,8 @@ const PriceText = styled.div`
 
 const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
   const [value, setValue] = useState({
-    min: price.price_gte,
-    max: price.price_lte,
+    min: price?.price_gte,
+    max: price?.price_lte,
   });
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const PriceComponent = ({ price, onChangePrice, mainPrice }) => {
         key="slider" // Add key to the Slider component
         min={0}
         max={100}
-        value={[value.min, value.max]}
+        value={[value?.min, value?.max]}
         onChange={handlePriceChange}
         onAfterChange={handlePriceFinalChange}
         renderTrack={({ props, state }) => (
