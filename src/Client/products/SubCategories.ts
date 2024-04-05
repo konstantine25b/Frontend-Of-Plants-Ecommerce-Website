@@ -25,6 +25,16 @@ export class SubcategoryClient {
             return [];
         }
     }
+    public async gatSubcategory(subcategoryId: number): Promise<SubcategoryData[]> {
+        try {
+            const url = `/api/product/subcategories/${subcategoryId}/` 
+            const response: AxiosResponse<SubcategoryData[]> = await this.axiosInstance.get(url);
+            return response.data;
+        } catch (error: any) {
+            this.handleRequestError(error);
+            return [];
+        }
+    }
 
     private handleRequestError(error: any): void {
         if (error.response) {

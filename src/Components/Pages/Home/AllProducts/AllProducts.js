@@ -94,7 +94,7 @@ const AllProducts = () => {
     <AllProductsContainer>
       <Title
         onClick={() =>
-          navigate(`/AllAll`)
+          navigate(`/AllProducts`)
         }
         showSeeAll={showSeeAll}
         onMouseEnter={() => setShowSeeAll(true)}

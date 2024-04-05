@@ -9,7 +9,8 @@ import Root from "./Root";
 import EachSubCategory from "./Components/Pages/SubCategories/EachSubCategory";
 import Product from "./Components/Pages/Products/Product";
 import Home from "./Components/Pages/Home/Home";
-import AllFeatured from "./Components/Pages/Home/FeaturedProducts/AllFeatured/AllFeatured";
+import AllFeatured from "./Components/Pages/AllFeatured/AllFeatured";
+import AllProductsPage from "./Components/Pages/AllProductsPage/AllProductsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +18,8 @@ const router = createBrowserRouter(
       <Route path="/Home" element={<Home />} />
       <Route path="/EachCategory" element={<EachSubCategory />} />
       <Route path="/EachProduct" element={<Product />} />
-      <Route path="/AllFeatured" element={<AllFeatured/>} />
+      <Route path="/AllFeatured" element={<AllFeatured />} />
+      <Route path="/AllProducts" element={<AllProductsPage />} />
     </Route>
   )
 );
