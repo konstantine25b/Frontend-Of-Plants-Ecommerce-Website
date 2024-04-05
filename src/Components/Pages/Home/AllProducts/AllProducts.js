@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { useQuery } from "react-query";
-import { clientProduct } from "../../../../Client/products/Product";
 import { useNavigate } from "react-router-dom";
 import AllProductList from "./AllProductsList";
 
@@ -41,28 +39,10 @@ const Title = styled.div`
   }
 `;
 
-const fetchSubcategoryData = async () => {
-  try {
-    const response = await clientProduct.listProducts({
-      is_active:true
-    });
-
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
-
-const AllProducts = () => {
+const AllProducts = ({ data }) => {
   const [showSeeAll, setShowSeeAll] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
-
-  const { data, isLoading, isError, refetch } = useQuery(
-    ["allProducts"],
-    fetchSubcategoryData
-  );
- 
 
   useEffect(() => {
     const handleResize = () => {
@@ -83,20 +63,10 @@ const AllProducts = () => {
     return 4;
   };
 
-  if (isLoading) {
-    return <div></div>;
-  }
-
-  if (isError) {
-    return <div>Error fetching subcategory data</div>;
-  }
-
   return (
     <AllProductsContainer>
       <Title
-        onClick={() =>
-          navigate(`/AllProducts`)
-        }
+        onClick={() => navigate(`/AllProducts`)}
         showSeeAll={showSeeAll}
         onMouseEnter={() => setShowSeeAll(true)}
         onMouseLeave={() => setShowSeeAll(false)}
