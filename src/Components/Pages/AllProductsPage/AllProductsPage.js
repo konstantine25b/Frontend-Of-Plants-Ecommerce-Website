@@ -40,7 +40,6 @@ const Component2 = styled.div`
 `;
 
 const fetchSubcategoryData = async (
-  is_featured = true,
   sizeFilter = undefined,
   price__gte = undefined,
   price__lte = undefined,
@@ -51,7 +50,6 @@ const fetchSubcategoryData = async (
   try {
     const response = await clientProduct.listProducts(
       {
-        is_featured: is_featured,
         size: sizeFilter,
         price__gte: price__gte,
         price__lte: price__lte,
@@ -77,10 +75,9 @@ const AllProductsPage = () => {
   });
 
   const { data, isLoading, isError, refetch } = useQuery(
-    ["AllProducts", currentPage, size, price],
+    ["allProducts", currentPage, size, price],
     () =>
       fetchSubcategoryData(
-        true,
         size,
         price.min,
         price.max,

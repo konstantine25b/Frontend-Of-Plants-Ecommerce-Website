@@ -62,6 +62,7 @@ const AllProducts = () => {
     ["allProducts"],
     fetchSubcategoryData
   );
+ 
 
   useEffect(() => {
     const handleResize = () => {

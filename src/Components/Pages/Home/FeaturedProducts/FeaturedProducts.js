@@ -60,9 +60,10 @@ const FeaturedProducts = () => {
   const navigate = useNavigate();
 
   const { data, isLoading, isError, refetch } = useQuery(
-    ["deaturedProducts"],
+    ["featuredProducts"],
     fetchSubcategoryData
   );
+  console.log(data, "featured")
 
   useEffect(() => {
     const handleResize = () => {

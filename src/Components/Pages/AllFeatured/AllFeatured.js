@@ -77,7 +77,7 @@ const AllFeatured = () => {
   });
 
   const { data, isLoading, isError, refetch } = useQuery(
-    ["allProducts", currentPage, size, price],
+    ["featuredProducts", currentPage, size, price],
     () =>
       fetchSubcategoryData(
         true,

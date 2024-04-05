@@ -41,7 +41,7 @@ export class ProductClient {
     },
     prevPage: number = 1
   ): Promise<{ results: ProductData[]; next: string | null }> {
-    console.log(filters);
+    
     if (dataInfo && pageNum != 1) {
       try {
         let result: { results: ProductData[]; next: string | null } = {
@@ -102,7 +102,6 @@ export class ProductClient {
 
           url += `?${queryParams.toString()}`;
         }
-        console.log(url);
 
         const response: AxiosResponse<{
           results: ProductData[];
@@ -124,7 +123,7 @@ export class ProductClient {
       const response: AxiosResponse<ProductData> = await this.axiosInstance.get(
         url
       );
-     
+
       return response.data;
     } catch (error: any) {
       this.handleRequestError(error);
