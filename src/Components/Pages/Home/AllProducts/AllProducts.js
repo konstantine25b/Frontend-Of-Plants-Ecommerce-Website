@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { useQuery } from "react-query";
 import { clientProduct } from "../../../../Client/products/Product";
-import FeaturedProductList from "./FeaturedProductList";
 import { useNavigate } from "react-router-dom";
+import AllProductList from "./AllProductsList";
 
-const FeaturedProductsContainer = styled.section`
-  padding: 3rem 0 1rem 0;
+const AllProductsContainer = styled.section`
+  padding: 3rem 0;
   background-color: #f7f7f7;
   text-align: center;
-  border-bottom: 0.3px solid gray;
 `;
 
 const Title = styled.div`
@@ -45,7 +44,7 @@ const Title = styled.div`
 const fetchSubcategoryData = async () => {
   try {
     const response = await clientProduct.listProducts({
-      is_featured: true,
+      is_active:true
     });
 
     return response;
@@ -54,13 +53,13 @@ const fetchSubcategoryData = async () => {
   }
 };
 
-const FeaturedProducts = () => {
+const AllProducts = () => {
   const [showSeeAll, setShowSeeAll] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
 
   const { data, isLoading, isError, refetch } = useQuery(
-    ["deaturedProducts"],
+    ["allProducts"],
     fetchSubcategoryData
   );
 
@@ -92,18 +91,20 @@ const FeaturedProducts = () => {
   }
 
   return (
-    <FeaturedProductsContainer>
+    <AllProductsContainer>
       <Title
-        onClick={() => navigate(`/AllFeatured`)}
+        onClick={() =>
+          navigate(`/AllAll`)
+        }
         showSeeAll={showSeeAll}
         onMouseEnter={() => setShowSeeAll(true)}
         onMouseLeave={() => setShowSeeAll(false)}
       >
-        {showSeeAll ? "See All Featured Products" : "Featured Products"}
+        {showSeeAll ? "See All Products" : "All Products"}
       </Title>
-      <FeaturedProductList data={data} getSliceCount={getSliceCount} />
-    </FeaturedProductsContainer>
+      <AllProductList data={data} getSliceCount={getSliceCount} />
+    </AllProductsContainer>
   );
 };
 
-export default FeaturedProducts;
+export default AllProducts;
