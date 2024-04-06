@@ -18,7 +18,7 @@ import SearchPage from "./Components/Pages/NavBar/UpperNav/Search/SearchPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route path="/Home" element={<Home />} />
+      <Route index={true} element={<Home />} />
       <Route path="/EachCategory" element={<EachSubCategory />} />
       <Route path="/EachProduct" element={<Product />} />
       <Route path="/AllFeatured" element={<AllFeatured />} />

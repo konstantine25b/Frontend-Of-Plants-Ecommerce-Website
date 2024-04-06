@@ -169,11 +169,7 @@ const UpperNavBar = ({ categories }) => {
       <MenuButton onClick={toggleMenu}>
         <MenuIcon width={35} height={35} color={COLORS.text} />
       </MenuButton>
-      <LogoImg
-        onClick={() => navigate(`/Home`)}
-        src={Logo}
-        alt="KosaPlants Logo"
-      />
+      <LogoImg onClick={() => navigate(`/`)} src={Logo} alt="KosaPlants Logo" />
       <Search />
       <ActionsContainer>
         <ActionButton primary>
