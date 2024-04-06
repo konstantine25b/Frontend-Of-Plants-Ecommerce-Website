@@ -13,6 +13,7 @@ import AllFeatured from "./Components/Pages/AllFeatured/AllFeatured";
 import AllProductsPage from "./Components/Pages/AllProductsPage/AllProductsPage";
 import LastItems from "./Components/Pages/LastItems.js/LastItems";
 import SearchPage from "./Components/Pages/NavBar/UpperNav/Search/SearchPage";
+import Cart from "./Components/Pages/Cart/Cart";
 
 
 const router = createBrowserRouter(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="/AllProducts" element={<AllProductsPage />} />
       <Route path="/LastItems" element={<LastItems />} />
       <Route path="/SearchPage" element={<SearchPage />} />
+      <Route path="/Cart" element={<Cart />} />
     </Route>
   )
 );

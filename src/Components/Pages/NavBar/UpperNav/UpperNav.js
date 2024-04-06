@@ -186,7 +186,7 @@ const UpperNavBar = ({ categories }) => {
             <UserIcon /> {/* User icon */}
           </IconContainer>
         </ActionButton>
-        <ActionButton>
+        <ActionButton onClick={() => navigate(`/Cart`)}>
           <ShoppingCartIconContainer>
             <IconContainer primary>
               <ShoppingCartIcon color={COLORS.black} />{" "}
