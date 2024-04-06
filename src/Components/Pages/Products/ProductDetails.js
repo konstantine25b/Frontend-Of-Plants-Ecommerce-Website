@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import COLORS from "../../styles/Colors";
+import AddProduct from "./AddProduct";
 
 const Container = styled.div`
   display: flex;
@@ -52,6 +53,7 @@ const Title = styled.h2`
 const Description = styled.p`
   font-size: 1rem;
   color: ${COLORS.gray};
+
 `;
 
 const Price = styled.p`
@@ -107,6 +109,7 @@ const RatingContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 0.5rem;
+  border-bottom: 0.2px solid ${COLORS.primary};
 `;
 
 const RatingText = styled.p`
@@ -134,6 +137,7 @@ const ProductComponent = ({ product, rating, reviewCount }) => {
         <Size>Size: {product.size}</Size>
         <Description>{product.description}</Description>
         <Price>${product.price}</Price>
+        <AddProduct productId = {product.id}/>
       </DataContainer>
     </Container>
   );

@@ -3,10 +3,12 @@ import { ShoppingCartIcon, UserIcon } from "@heroicons/react/outline"; // Import
 import Logo from "./KosaPlants_logo.png"; // Make sure to provide the correct path to your logo image
 import COLORS from "../../../styles/Colors";
 import { MenuIcon } from "@heroicons/react/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToggleMenu from "./ToggleMenu";
 import { useNavigate } from "react-router-dom";
 import Search from "./Search/Search";
+import { selectCartItems } from "../../../../Redux/Cart";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   position: fixed;
@@ -134,14 +136,14 @@ const ItemCount = styled.span`
   top: -0.7rem;
   right: -0.5rem;
   background-color: ${COLORS.text};
-  color: ${COLORS.text};
+  color: ${COLORS.fancyBlue};
   border-radius: 50%;
   width: 1.25rem;
   height: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 0.8rem;
 `;
 const MenuButton = styled.button`
   background: none;
@@ -157,12 +159,19 @@ const MenuButton = styled.button`
 
 const UpperNavBar = ({ categories }) => {
   // Placeholder for the number of items in the shopping cart
-  const itemsInCart = 5;
   const [showMenu, setShowMenu] = useState(false);
+  const [itemsInCart, setItemsInCart] = useState(0);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
   const navigate = useNavigate();
+
+  const items = useSelector((state) => selectCartItems(state));
+  useEffect(() => {
+    if (items) {
+      setItemsInCart(items?.length);
+    }
+  }, [items]);
 
   return (
     <Container>
@@ -180,7 +189,7 @@ const UpperNavBar = ({ categories }) => {
         <ActionButton>
           <ShoppingCartIconContainer>
             <IconContainer primary>
-              <ShoppingCartIcon color={COLORS.fancyBlue} />{" "}
+              <ShoppingCartIcon color={COLORS.black} />{" "}
               {/* Shopping cart icon */}
             </IconContainer>
             <ItemCount>{itemsInCart}</ItemCount>

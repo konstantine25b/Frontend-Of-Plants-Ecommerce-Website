@@ -4,6 +4,7 @@ import COLORS from "../../styles/Colors";
 
 const ReviewsContainer = styled.div`
   margin-top: 2rem;
+  margin-left: 2rem;
 `;
 
 const ReviewItem = styled.div`
