@@ -16,7 +16,7 @@ import SearchPage from "./Components/Pages/NavBar/UpperNav/Search/SearchPage";
 import Cart from "./Components/Pages/Cart/Cart";
 import Login from "./Components/Authentication/LogIn/Login";
 import SignUp from "./Components/Authentication/SignUp/SignUp";
-
+import Order from "./Components/Pages/Order/Order";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="/Cart" element={<Cart />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />} />
+      <Route path="/Order" element={<Order />} />
     </Route>
   )
 );

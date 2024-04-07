@@ -131,7 +131,6 @@ const IconContainer = styled.div`
 const ShoppingCartIconContainer = styled.div`
   position: relative;
 `;
-const StyledP = styled.div``;
 
 const ItemCount = styled.span`
   position: absolute;

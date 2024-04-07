@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCartTotal,
@@ -7,6 +7,8 @@ import {
 import styled from "@emotion/styled";
 import EachCartItem from "./EachCartItem";
 import COLORS from "../../styles/Colors";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../../Contexts/AuthContext";
 
 const Container = styled.div`
   padding: 2rem;
@@ -50,8 +52,19 @@ const ButtonDiv = styled.div`
 `;
 
 const Cart = () => {
+  const navigate = useNavigate();
   const cartTotal = useSelector(selectCartTotal);
   const groupedProducts = useSelector(selectGroupedProductsById);
+  const { user } = useContext(AuthContext);
+  const handleNavigation= ()=>{
+    console.log(user)
+     if(user){
+      navigate('/Order')
+     }
+     else{
+      navigate('/LogIn')
+     }
+  }
 
   return (
     <Container>
@@ -64,7 +77,7 @@ const Cart = () => {
         <TotalAmount>Total: ${cartTotal}</TotalAmount>
       </TotalContainer>
       <ButtonDiv>
-        <GoToOrderButton>Proceed to checkout</GoToOrderButton>
+        <GoToOrderButton onClick={()=>handleNavigation()} >Proceed to checkout</GoToOrderButton>
       </ButtonDiv>
     </Container>
   );
