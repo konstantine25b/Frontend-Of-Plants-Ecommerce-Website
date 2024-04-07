@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ShoppingCartIcon, UserIcon } from "@heroicons/react/outline"; // Import specific icon from Heroicons
+import { ShoppingCartIcon } from "@heroicons/react/outline"; // Import specific icon from Heroicons
 import Logo from "./KosaPlants_logo.png"; // Make sure to provide the correct path to your logo image
 import COLORS from "../../../styles/Colors";
 import { MenuIcon } from "@heroicons/react/outline";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Search from "./Search/Search";
 import { selectCartItems } from "../../../../Redux/Cart";
 import { useSelector } from "react-redux";
+import LoginNavbar from "../../../Authentication/LogIn/LoginNavbar";
 
 const Container = styled.div`
   position: fixed;
@@ -60,9 +61,10 @@ const ActionsContainer = styled.div`
 `;
 
 const ActionButton = styled.button`
-  padding: 0.625rem 1.25rem; /* Converted from 10px 20px to rem */
   margin-left: 0.625rem; /* Converted from 10px to rem */
   border: none;
+  display: flex;
+  align-items: center;
   margin-right: 1rem;
   border-radius: 0.3125rem; /* Converted from 5px to rem */
   background-color: ${(props) =>
@@ -98,8 +100,8 @@ const ActionButton = styled.button`
 `;
 
 const IconContainer = styled.div`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,6 +132,7 @@ const IconContainer = styled.div`
 const ShoppingCartIconContainer = styled.div`
   position: relative;
 `;
+const StyledP = styled.div``;
 
 const ItemCount = styled.span`
   position: absolute;
@@ -161,6 +164,7 @@ const UpperNavBar = ({ categories }) => {
   // Placeholder for the number of items in the shopping cart
   const [showMenu, setShowMenu] = useState(false);
   const [itemsInCart, setItemsInCart] = useState(0);
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -181,15 +185,11 @@ const UpperNavBar = ({ categories }) => {
       <LogoImg onClick={() => navigate(`/`)} src={Logo} alt="KosaPlants Logo" />
       <Search />
       <ActionsContainer>
-        <ActionButton onClick={() => navigate(`/Login`)} primary>
-          <IconContainer>
-            <UserIcon /> {/* User icon */}
-          </IconContainer>
-        </ActionButton>
+        <LoginNavbar/>
         <ActionButton onClick={() => navigate(`/Cart`)}>
           <ShoppingCartIconContainer>
             <IconContainer primary>
-              <ShoppingCartIcon color={COLORS.black} />{" "}
+              <ShoppingCartIcon width="1.3rem" color={COLORS.black} />{" "}
               {/* Shopping cart icon */}
             </IconContainer>
             <ItemCount>{itemsInCart}</ItemCount>

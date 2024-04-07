@@ -8,7 +8,7 @@ const MenuContainer = styled.div`
   position: absolute;
   top: 4.25rem;
   right: 0;
-  background-color: ${COLORS.white};
+  background-color:${COLORS.white};
   padding: 1rem; /* Adjust padding for smaller sizes */
   height: 100vh;
   width: 60%; /* Adjust width for smaller sizes */
@@ -80,7 +80,7 @@ const ToggleMenu = ({ categories, setShowMenu }) => {
     const handleClickOutside = (event) => {
       if (lowerNavRef.current && !lowerNavRef.current.contains(event.target)) {
         setActiveCategory(null);
-        setShowMenu(false);
+        setShowMenu(false)
       }
     };
 

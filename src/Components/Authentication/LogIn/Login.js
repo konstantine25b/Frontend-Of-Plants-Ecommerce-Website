@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "@emotion/styled";
 import AuthContext from "../../../Contexts/AuthContext";
 import COLORS from "../../styles/Colors";
+import { useNavigate } from "react-router-dom";
 
 const LoginContainer = styled.div`
   max-width: 30rem;
@@ -79,6 +80,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false); // Add loading state
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,7 +100,7 @@ const Login = () => {
       <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Hi, Welcome!</h2>
       <LoginForm onSubmit={handleSubmit}>
         <FormField>
-          <Label htmlFor="username">Email:</Label>
+          <Label htmlFor="username">Username:</Label>
           <Input
             type="text"
             id="username"
@@ -124,7 +126,10 @@ const Login = () => {
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </LoginForm>
       <NoAccount>
-        No account yet? <CreateAccountLink>Create one here!</CreateAccountLink>
+        No account yet?{" "}
+        <CreateAccountLink onClick={() => navigate("/SignUp")}>
+          Create one here!
+        </CreateAccountLink>
       </NoAccount>
     </LoginContainer>
   );

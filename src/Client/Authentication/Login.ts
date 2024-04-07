@@ -38,7 +38,7 @@ export class AuthClient {
           try {
             // Eject the interceptor to prevent infinite loop
             this.axiosInstance.interceptors.response.eject(interceptor);
-            console.log(32);
+
             await this.refreshTokens();
             return this.axiosInstance(originalRequest);
           } catch (refreshError) {

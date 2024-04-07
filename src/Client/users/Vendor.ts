@@ -22,7 +22,7 @@ export class VendorClient {
     });
   }
 
-  public async createCustomer(
+  public async createVendor(
     customerData: VendorUser
   ): Promise<VendorUser | null> {
     try {
