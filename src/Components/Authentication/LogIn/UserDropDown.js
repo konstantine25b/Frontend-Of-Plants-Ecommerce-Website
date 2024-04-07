@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { LogoutIcon, UserIcon, ViewListIcon } from "@heroicons/react/solid";
 import { useContext } from "react";
 import AuthContext from "../../../Contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const OptionsContainer = styled.div`
   position: absolute;
@@ -62,6 +63,7 @@ const IconContainer = styled.span`
 
 const UserDropDown = () => {
   let { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout(); // Call the logout function when the button is clicked
@@ -69,7 +71,7 @@ const UserDropDown = () => {
 
   return (
     <OptionsContainer>
-      <Option onClick={() => alert("See Account Details")}>
+      <Option onClick={() => navigate("/Profile")}>
         <IconContainer>
           <UserIcon width="1.5rem" />
         </IconContainer>
