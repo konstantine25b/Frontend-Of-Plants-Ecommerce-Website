@@ -6,7 +6,7 @@ import EachCategory from "./EachCategory";
 const Container = styled.div`
   position: fixed;
   top: 4.25rem;
-  z-index: 20;
+  z-index: 2;
   width: 100%;
   left: 0;
   display: flex;

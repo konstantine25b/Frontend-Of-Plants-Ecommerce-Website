@@ -18,12 +18,11 @@ const Container = styled.div`
   width: 100%;
   height: 3rem;
   display: flex;
-  z-index: 20;
+  z-index: 3;
   justify-content: space-between;
   align-items: center;
   padding: 0.625rem; /* Converted from 10px to rem */
   background-color: ${COLORS.main}; /* Use main color as background */
-  box-shadow: 0px 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Converted from 0px 2px 4px rgba(0, 0, 0, 0.1) to rem */
 `;
 
 const LogoImg = styled.img`
@@ -185,7 +184,7 @@ const UpperNavBar = ({ categories }) => {
       <LogoImg onClick={() => navigate(`/`)} src={Logo} alt="KosaPlants Logo" />
       <Search />
       <ActionsContainer>
-        <LoginNavbar/>
+        <LoginNavbar />
         <ActionButton onClick={() => navigate(`/Cart`)}>
           <ShoppingCartIconContainer>
             <IconContainer primary>

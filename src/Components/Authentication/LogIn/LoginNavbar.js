@@ -4,6 +4,7 @@ import COLORS from "../../styles/Colors";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../../Contexts/AuthContext";
+import ToggleUser from "./ToggleUser";
 
 const ActionButton = styled.button`
   margin-left: 0.625rem; /* Converted from 10px to rem */
@@ -81,14 +82,7 @@ const LoginNavbar = () => {
   const navigate = useNavigate();
 
   if (user) {
-    return (
-      <ActionButton onClick={() => navigate(`/Login`)} primary>
-        <StyledP>{user.username}</StyledP>
-        <IconContainer>
-          <UserIcon width="1.3rem" /> {/* User icon */}
-        </IconContainer>
-      </ActionButton>
-    );
+    return <ToggleUser user = {user}/>;
   } else {
     return (
       <ActionButton onClick={() => navigate(`/Login`)} primary>
