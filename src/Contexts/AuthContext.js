@@ -9,6 +9,7 @@ const AuthContext = createContext();
 export default AuthContext;
 export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate(); // Use useNavigate for navigation
 
   async function fetchUserData(accessToken, role) {
@@ -21,6 +22,8 @@ export const AuthProvider = ({ children }) => {
 
       if (userData) {
         console.log("User data:", userData);
+        setUser(userData);
+        navigate("/");
       } else {
         console.log("Failed to fetch user data");
       }
@@ -33,12 +36,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await authClient.login(username, password);
       setAccessToken(authClient.accessToken);
-
-      // Fetch user data based on the selected role
-      console.log(authClient.accessToken, role);
       fetchUserData(authClient.accessToken, role);
-
-      // navigate("/");
     } catch (error) {
       console.error("Login failed:", error.message);
     }
@@ -53,6 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   const authContextValue = {
     accessToken,
+    user,
     login,
     logout,
   };

@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { UserIcon } from "@heroicons/react/outline"; // Import specific icon from Heroicons
 import COLORS from "../../styles/Colors";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../../Contexts/AuthContext";
 
 const ActionButton = styled.button`
   margin-left: 0.625rem; /* Converted from 10px to rem */
@@ -75,15 +77,28 @@ const IconContainer = styled.div`
 const StyledP = styled.div``;
 
 const LoginNavbar = () => {
+  let { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  return (
-    <ActionButton onClick={() => navigate(`/Login`)} primary>
-      <IconContainer>
-        <UserIcon width="1.3rem" /> {/* User icon */}
-      </IconContainer>
-      <StyledP>Sign In</StyledP>
-    </ActionButton>
-  );
+
+  if (user) {
+    return (
+      <ActionButton onClick={() => navigate(`/Login`)} primary>
+        <StyledP>{user.username}</StyledP>
+        <IconContainer>
+          <UserIcon width="1.3rem" /> {/* User icon */}
+        </IconContainer>
+      </ActionButton>
+    );
+  } else {
+    return (
+      <ActionButton onClick={() => navigate(`/Login`)} primary>
+        <IconContainer>
+          <UserIcon width="1.3rem" /> {/* User icon */}
+        </IconContainer>
+        <StyledP>Sign In</StyledP>
+      </ActionButton>
+    );
+  }
 };
 
 export default LoginNavbar;

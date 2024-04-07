@@ -107,7 +107,7 @@ export class AuthClient {
       if (response.data.access && response.data.refresh) {
         this.accessToken = response.data.access;
         this.refreshToken = response.data.refresh;
-        console.log(this.accessToken,"this")
+    
         this.saveTokensToStorage();
         this.scheduleTokenRefresh();
       } else {

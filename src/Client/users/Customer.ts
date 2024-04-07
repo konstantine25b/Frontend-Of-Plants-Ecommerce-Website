@@ -65,7 +65,7 @@ export class CustomerClient {
       }
 
       const userId = decodedToken.user_id;
-      console.log(this.accessToken);
+   
       const response: AxiosResponse<CustomUser> = await this.axiosInstance.get(
         `/api/user/customers/${userId}`,
         {

@@ -59,7 +59,7 @@ export class VendorClient {
       }
 
       const decodedToken = this.decodeToken(accessToken);
-      console.log(this.accessToken);
+
       if (!decodedToken || !decodedToken.user_id) {
         throw new Error("Invalid token or missing user ID");
       }
