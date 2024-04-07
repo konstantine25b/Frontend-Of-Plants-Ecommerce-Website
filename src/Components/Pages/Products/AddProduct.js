@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import {
   PlusIcon,
@@ -6,8 +6,8 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/outline";
 import COLORS from "../../styles/Colors";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, selectCartItemsWithId } from "../../../Redux/Cart";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../Redux/Cart";
 
 const Container = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ const Label = styled.div`
   }
 `;
 
-const AddProduct = (productId) => {
+const AddProduct = (product) => {
   const dispatch = useDispatch();
   const [number, setNumber] = useState(1);
 
@@ -72,11 +72,7 @@ const AddProduct = (productId) => {
 
   const handleCart = () => {
     for (let i = 0; i < number; i++) {
-      dispatch(
-        addToCart(
-          productId,
-        )
-      );
+      dispatch(addToCart(product));
     }
   };
 

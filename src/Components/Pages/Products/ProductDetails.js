@@ -53,7 +53,6 @@ const Title = styled.h2`
 const Description = styled.p`
   font-size: 1rem;
   color: ${COLORS.gray};
-
 `;
 
 const Price = styled.p`
@@ -137,7 +136,7 @@ const ProductComponent = ({ product, rating, reviewCount }) => {
         <Size>Size: {product.size}</Size>
         <Description>{product.description}</Description>
         <Price>${product.price}</Price>
-        <AddProduct productId = {product.id}/>
+        <AddProduct product={product} />
       </DataContainer>
     </Container>
   );
