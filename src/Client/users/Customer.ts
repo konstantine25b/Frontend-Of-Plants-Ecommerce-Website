@@ -15,11 +15,13 @@ interface CustomUser extends BaseUser {
 
 export class CustomerClient {
   private axiosInstance: AxiosInstance;
+  private accessToken: string | null;
 
-  constructor(baseUrl: string) {
+  constructor(baseUrl: string, accessToken: string | null = null) {
     this.axiosInstance = axios.create({
       baseURL: baseUrl,
     });
+    this.accessToken = accessToken;
   }
 
   public async createCustomer(
@@ -30,6 +32,28 @@ export class CustomerClient {
         "/api/user/customers/",
         customerData
       );
+      return response.data;
+    } catch (error: any) {
+      this.handleRequestError(error);
+      return null;
+    }
+  }
+
+  public async getCustomer(): Promise<CustomUser | null> {
+    try {
+      if (!this.accessToken) {
+        throw new Error("Access token is missing");
+      }
+
+      const response: AxiosResponse<CustomUser> = await this.axiosInstance.get(
+        "/api/user/customers/",
+        {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        }
+      );
+      console.log(response);
       return response.data;
     } catch (error: any) {
       this.handleRequestError(error);
@@ -49,10 +73,11 @@ export class CustomerClient {
       // Something happened in setting up the request that triggered an Error
       console.error("Error setting up the request:", error.message);
     }
-    throw new Error("Failed to create customer");
+    throw new Error("Failed to fetch customer data");
   }
 }
 
 // Instantiate CustomerClient
 const baseUrl = "http://164.92.170.208";
-export const clientCustomers = new CustomerClient(baseUrl);
+const accessToken = localStorage.getItem("accessToken");
+export const clientCustomers = new CustomerClient(baseUrl, accessToken);
