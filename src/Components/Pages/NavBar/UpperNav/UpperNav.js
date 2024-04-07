@@ -181,7 +181,7 @@ const UpperNavBar = ({ categories }) => {
       <LogoImg onClick={() => navigate(`/`)} src={Logo} alt="KosaPlants Logo" />
       <Search />
       <ActionsContainer>
-        <ActionButton primary>
+        <ActionButton onClick={() => navigate(`/Login`)} primary>
           <IconContainer>
             <UserIcon /> {/* User icon */}
           </IconContainer>

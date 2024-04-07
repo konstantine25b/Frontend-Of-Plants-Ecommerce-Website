@@ -14,6 +14,7 @@ import AllProductsPage from "./Components/Pages/AllProductsPage/AllProductsPage"
 import LastItems from "./Components/Pages/LastItems.js/LastItems";
 import SearchPage from "./Components/Pages/NavBar/UpperNav/Search/SearchPage";
 import Cart from "./Components/Pages/Cart/Cart";
+import Login from "./Components/Authentication/LogIn/Login";
 
 
 const router = createBrowserRouter(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route path="/LastItems" element={<LastItems />} />
       <Route path="/SearchPage" element={<SearchPage />} />
       <Route path="/Cart" element={<Cart />} />
+      <Route path="/Login" element={<Login />} />
     </Route>
   )
 );
