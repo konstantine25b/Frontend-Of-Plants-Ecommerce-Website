@@ -4,7 +4,7 @@ import EachProduct from "./EachProduct";
 
 const RightSideContainer = styled.div`
   width: 100%;
-  background-color: ${COLORS.lightGray};
+  background-color: ${COLORS.white};
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

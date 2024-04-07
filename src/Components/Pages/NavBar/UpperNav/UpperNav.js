@@ -68,7 +68,7 @@ const ActionButton = styled.button`
   background-color: ${(props) =>
     props.primary
       ? COLORS.fancyBlue
-      : "#fff"}; /* Use fancy blue for primary action */
+      : COLORS.mainBackground}; /* Use fancy blue for primary action */
   color: ${(props) =>
     props.primary ? "#fff" : COLORS.text}; /* White text for primary action */
   cursor: pointer;

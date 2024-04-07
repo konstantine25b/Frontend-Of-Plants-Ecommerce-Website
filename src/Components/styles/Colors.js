@@ -7,7 +7,8 @@ const COLORS = {
   fancyRed: "#f54242", // Fancy red color
   primary: "lightgray",
   gray:"gray",
-  golden: "#FFD700"
+  golden: "#FFD700",
+  mainBackground: "#f0f2f5",
 
 };
 

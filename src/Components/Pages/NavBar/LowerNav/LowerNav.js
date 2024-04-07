@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${COLORS.main};
+
   padding: 0.5rem;
   height: 2.5rem;
   border-top: 0.5px solid black;

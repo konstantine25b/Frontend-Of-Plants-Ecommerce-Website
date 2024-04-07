@@ -2,15 +2,18 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import SizeComponent from "./Size";
 import PriceComponent from "./Price";
+import COLORS from "../../../styles/Colors";
 
 const LeftSideContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
   width: 80%;
+  background-color: ${COLORS.white};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-bottom: 0.5px solid gray;
   height: fit-content; /* Adjust height based on content */
+  
 `;
 
 const Title = styled.h2`
