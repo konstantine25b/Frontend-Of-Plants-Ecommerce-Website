@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import COLORS from "../../styles/Colors";
+import AddReview from "./AddReview";
 
 const ReviewsContainer = styled.div`
   margin-top: 2rem;
@@ -64,25 +65,23 @@ const generateStarIcons = (rating) => {
   return starIcons;
 };
 
-const ReviewsSection = ({ reviews }) => {
+const ReviewsSection = ({ reviews,productId ,refetch}) => {
   return (
     <ReviewsContainer>
-      {reviews.map((review) => {
-        return (
-
-          <ReviewItem key={review.id}>
-            <ReviewHeader>
-              <UserName>{review.username}</UserName>
-              <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
-            </ReviewHeader>
-            <StarRating>
-              {generateStarIcons(review.rating)}
-              <span>({review.rating.toFixed(1)})</span>
-            </StarRating>
-            <ReviewContent>{review.comment}</ReviewContent>
-          </ReviewItem>
-        );
-      })}
+      <AddReview productId={productId} refetch={refetch}/>
+      {reviews.map((review) => (
+        <ReviewItem key={review.id}>
+          <ReviewHeader>
+            <UserName>{review.username}</UserName>
+            <ReviewDate>{formatDate(review.created_at)}</ReviewDate>
+          </ReviewHeader>
+          <StarRating>
+            {generateStarIcons(review.rating)}
+            <span>({review.rating.toFixed(1)})</span>
+          </StarRating>
+          <ReviewContent>{review.comment}</ReviewContent>
+        </ReviewItem>
+      ))}
     </ReviewsContainer>
   );
 };

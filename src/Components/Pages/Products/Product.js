@@ -91,7 +91,7 @@ const Product = () => {
         rating={rating}
         reviewCount={data?.reviews?.count}
       />
-      <ReviewsSection reviews={data?.reviews?.results} />
+      <ReviewsSection productId ={data.product.id} reviews={data?.reviews?.results} refetch={refetch}/>
     </Main>
   );
 };

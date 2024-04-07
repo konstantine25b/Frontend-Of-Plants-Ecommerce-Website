@@ -9,6 +9,13 @@ interface ReviewData {
   created_at: string;
   updated_at: string;
 }
+interface CreateReviewData {
+  product: number;
+  rating: number;
+  comment: string;
+  username: string;
+  user: number;
+}
 
 export class ReviewClient {
   private axiosInstance: AxiosInstance;
@@ -55,7 +62,7 @@ export class ReviewClient {
   }
 
   public async getReview(reviewId: number): Promise<ReviewData | null> {
-    const url = `api/review/reviews/${reviewId}/`;
+    const url = `/api/review/reviews/${reviewId}/`;
     try {
       const response: AxiosResponse<ReviewData> = await this.axiosInstance.get(
         url
@@ -67,6 +74,28 @@ export class ReviewClient {
     }
   }
 
+  public async createReview(
+    reviewData: CreateReviewData,
+    authToken: string // Pass the authentication token as a parameter
+  ): Promise<ReviewData | null> {
+    console.log(reviewData, authToken);
+    const url = `/api/review/reviews/`;
+    try {
+      const response: AxiosResponse<ReviewData> = await this.axiosInstance.post(
+        url,
+        reviewData,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`, // Include the authentication token in the request headers
+          },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      this.handleRequestError(error);
+      return null;
+    }
+  }
   // Other methods for create, update, delete reviews can be added here
 
   private handleRequestError(error: any): void {
