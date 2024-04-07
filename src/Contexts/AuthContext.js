@@ -1,7 +1,8 @@
 import React, { createContext, useState } from "react";
 import { authClient } from "../Client/Authentication/Login";
-import { useNavigate } from "react-router-dom";
 import { clientCustomers } from "../Client/users/Customer";
+import { clientVendors } from "../Client/users/Vendor"; // Import Vendor Client
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -10,26 +11,33 @@ export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null);
   const navigate = useNavigate(); // Use useNavigate for navigation
 
-  async function fetchCustomerData() {
+  async function fetchUserData(accessToken, role) {
     try {
-      // Call the getCustomer method to fetch customer data
-      const customer = await clientCustomers.getCustomer();
-      if (customer) {
-        console.log("Customer data:", customer);
+      // Call the appropriate client method based on the role
+      const userData =
+        role === "Customer"
+          ? await clientCustomers.getCustomer(accessToken)
+          : await clientVendors.getVendor(accessToken);
+
+      if (userData) {
+        console.log("User data:", userData);
       } else {
-        console.log("Failed to fetch customer data");
+        console.log("Failed to fetch user data");
       }
     } catch (error) {
       console.error("An error occurred:", error);
     }
   }
 
-  const login = async (username, password) => {
+  const login = async (username, password, role) => {
     try {
       await authClient.login(username, password);
       setAccessToken(authClient.accessToken);
 
-      fetchCustomerData();
+      // Fetch user data based on the selected role
+      console.log(authClient.accessToken, role);
+      fetchUserData(authClient.accessToken, role);
+
       // navigate("/");
     } catch (error) {
       console.error("Login failed:", error.message);

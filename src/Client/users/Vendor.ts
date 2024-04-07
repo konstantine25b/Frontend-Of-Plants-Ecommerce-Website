@@ -15,11 +15,13 @@ interface VendorUser extends BaseUser {
 
 export class VendorClient {
   private axiosInstance: AxiosInstance;
+  private accessToken: string | null;
 
   constructor(baseUrl: string) {
     this.axiosInstance = axios.create({
       baseURL: baseUrl,
     });
+    this.accessToken = localStorage.getItem("accessToken");
   }
 
   public async createVendor(
@@ -30,6 +32,49 @@ export class VendorClient {
         "/api/user/customers/",
         customerData
       );
+      return response.data;
+    } catch (error: any) {
+      this.handleRequestError(error);
+      return null;
+    }
+  }
+
+  private decodeToken(token: string): { [key: string]: any } | null {
+    try {
+      const payload = token.split(".")[1];
+
+      return JSON.parse(atob(payload));
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return null;
+    }
+  }
+
+  public async getVendor(
+    accessToken: string | null
+  ): Promise<VendorUser | null> {
+    try {
+      if (!accessToken) {
+        throw new Error("Access token is missing");
+      }
+
+      const decodedToken = this.decodeToken(accessToken);
+      console.log(this.accessToken);
+      if (!decodedToken || !decodedToken.user_id) {
+        throw new Error("Invalid token or missing user ID");
+      }
+
+      const userId = decodedToken.user_id;
+
+      const response: AxiosResponse<VendorUser> = await this.axiosInstance.get(
+        `/api/user/vendors/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        }
+      );
+
       return response.data;
     } catch (error: any) {
       this.handleRequestError(error);

@@ -43,6 +43,7 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 1.2rem;
   transition: background-color 0.3s;
+  margin-top: 0.5rem;
 
   &:hover {
     background-color: ${COLORS.hoverBlue};
@@ -74,6 +75,13 @@ const CreateAccountLink = styled.span`
   }
 `;
 
+const Dropdown = styled.select`
+  padding: 0.8rem;
+  border-radius: 0.3rem;
+  border: 1px solid ${COLORS.gray};
+  font-size: 1rem;
+`;
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -81,18 +89,24 @@ const Login = () => {
   const [loading, setLoading] = useState(false); // Add loading state
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [selectedRole, setSelectedRole] = useState("Customer");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
     if (loading) return; // Prevent multiple submissions
     setLoading(true); // Set loading state to true
     try {
-      await login(username, password);
+    
+      await login(username, password, selectedRole);
     } catch (error) {
       setError("Invalid username or password");
     } finally {
       setLoading(false); // Reset loading state
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await handleLogin();
   };
 
   return (
@@ -117,6 +131,14 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormField>
+        <Label>Login As:</Label>
+        <Dropdown
+          value={selectedRole}
+          onChange={(e) => setSelectedRole(e.target.value)}
+        >
+          <option value="Customer">Customer</option>
+          <option value="Vendor">Vendor</option>
+        </Dropdown>
         <Button type="submit" disabled={loading}>
           {" "}
           {/* Disable button when loading */}

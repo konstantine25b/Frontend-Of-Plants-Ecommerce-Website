@@ -17,11 +17,11 @@ export class CustomerClient {
   private axiosInstance: AxiosInstance;
   private accessToken: string | null;
 
-  constructor(baseUrl: string, accessToken: string | null = null) {
+  constructor(baseUrl: string) {
     this.axiosInstance = axios.create({
       baseURL: baseUrl,
     });
-    this.accessToken = accessToken;
+    this.accessToken = localStorage.getItem("accessToken");
   }
 
   public async createCustomer(
@@ -39,21 +39,42 @@ export class CustomerClient {
     }
   }
 
-  public async getCustomer(): Promise<CustomUser | null> {
+  private decodeToken(token: string): { [key: string]: any } | null {
     try {
-      if (!this.accessToken) {
+      const payload = token.split(".")[1];
+
+      return JSON.parse(atob(payload));
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return null;
+    }
+  }
+
+  public async getCustomer(
+    accessToken: string | null
+  ): Promise<CustomUser | null> {
+    try {
+      if (!accessToken) {
         throw new Error("Access token is missing");
       }
 
+      const decodedToken = this.decodeToken(accessToken);
+
+      if (!decodedToken || !decodedToken.user_id) {
+        throw new Error("Invalid token or missing user ID");
+      }
+
+      const userId = decodedToken.user_id;
+      console.log(this.accessToken);
       const response: AxiosResponse<CustomUser> = await this.axiosInstance.get(
-        "/api/user/customers/",
+        `/api/user/customers/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${this.accessToken}`,
           },
         }
       );
-      console.log(response);
+
       return response.data;
     } catch (error: any) {
       this.handleRequestError(error);
@@ -79,5 +100,4 @@ export class CustomerClient {
 
 // Instantiate CustomerClient
 const baseUrl = "http://164.92.170.208";
-const accessToken = localStorage.getItem("accessToken");
-export const clientCustomers = new CustomerClient(baseUrl, accessToken);
+export const clientCustomers = new CustomerClient(baseUrl);
