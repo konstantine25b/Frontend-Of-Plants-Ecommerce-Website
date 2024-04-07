@@ -67,6 +67,7 @@ const UserDropDown = () => {
 
   const handleLogout = () => {
     logout(); // Call the logout function when the button is clicked
+    navigate("/LogIn");
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import AuthContext from "../../../Contexts/AuthContext";
 
+
 const ProfileContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
@@ -22,6 +23,7 @@ const Label = styled.span`
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
+  
 
   return (
     <ProfileContainer>
