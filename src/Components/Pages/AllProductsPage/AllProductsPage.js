@@ -12,11 +12,15 @@ const Container = styled.div`
   margin-left: 5%;
   margin-right: 5%;
   padding: 0;
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     justify-content: center;
+    flex-direction: column;
     width: 90%;
-    margin-left: 0%;
+    margin-left: 5%;
     margin-right: 0%;
+    align-items: center;
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -25,8 +29,10 @@ const Component1 = styled.div`
   padding: 0;
   display: flex;
   justify-content: center;
-  @media (max-width: 1024px) {
-    display: none;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -34,8 +40,10 @@ const Component2 = styled.div`
   width: 70%;
   padding: 0;
   margin: 0;
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     width: 100%;
+    padding: 0;
+    margin: 0;
   }
 `;
 

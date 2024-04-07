@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import COLORS from "../../styles/Colors";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { clientCustomers } from "../../../Client/users/Customer";
 import { clientVendors } from "../../../Client/users/Vendor";
+import AuthContext from "../../../Contexts/AuthContext";
 
 const SignupContainer = styled.div`
   max-width: 30rem;
@@ -84,6 +85,7 @@ const CreateAccountLink = styled.span`
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -98,6 +100,14 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  const handleLogin = async (username, password, selectedRole) => {
+    try {
+      await login(username, password, selectedRole);
+    } catch (error) {
+      console.error("Error creating customer:", error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -108,6 +118,7 @@ const Signup = () => {
         .then((createdCustomer) => {
           if (createdCustomer) {
             console.log("New customer created:", createdCustomer);
+            handleLogin(formData.username, formData.password,formData.role);
           } else {
             console.error("Failed to create customer");
           }

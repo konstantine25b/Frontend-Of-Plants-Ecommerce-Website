@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import { UserIcon } from "@heroicons/react/outline"; // Import specific icon from Heroicons
 import COLORS from "../../styles/Colors";
+import UserDropDown from "./UserDropDown";
 
 const Container = styled.div`
   position: relative;
@@ -46,31 +47,6 @@ const IconContainer = styled.div`
   }
 `;
 
-const OptionsContainer = styled.div`
-  position: absolute;
-  z-index: 50;
-  top: 100%;
-  left: 0;
-
-  background-color: ${COLORS.mainBackground};
-  border-radius: 0.3125rem;
-  padding: 0.5rem;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const Option = styled.button`
-  border: none;
-  background-color: transparent;
-  color: ${COLORS.text};
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: ${COLORS.hoverBlue};
-  }
-`;
-
 const ToggleUser = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
@@ -97,13 +73,7 @@ const ToggleUser = ({ user }) => {
           <UserIcon width="1.3rem" /> {/* User icon */}
         </IconContainer>
       </ActionButton>
-      {isOpen && (
-        <OptionsContainer>
-          <Option>Option 1</Option>
-          <Option>Option 2</Option>
-          <Option>Option 3</Option>
-        </OptionsContainer>
-      )}
+      {isOpen && <UserDropDown />}
     </Container>
   );
 };

@@ -13,7 +13,9 @@ const LeftSideContainer = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-bottom: 0.5px solid gray;
   height: fit-content; /* Adjust height based on content */
-  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Title = styled.h2`

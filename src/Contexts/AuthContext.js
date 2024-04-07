@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     console.log(JSON.parse(localStorage.getItem("user")));
     let prevUser = JSON.parse(localStorage.getItem("user"));
     if (prevUser) {
-      fetchUserData(localStorage.getItem('accessToken'), prevUser.role);
+      fetchUserData(localStorage.getItem("accessToken"), prevUser.role);
     }
   }, []);
 
@@ -53,8 +53,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    authClient.logout();
     setAccessToken(null);
+    setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
