@@ -102,12 +102,12 @@ export class AuthClient {
           password,
         }
       );
-      
+     
+
       // Check if both access and refresh tokens are present
       if (response.data.access && response.data.refresh) {
         this.accessToken = response.data.access;
         this.refreshToken = response.data.refresh;
-    
         this.saveTokensToStorage();
         this.scheduleTokenRefresh();
       } else {

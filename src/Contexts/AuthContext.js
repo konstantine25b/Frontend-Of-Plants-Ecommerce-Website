@@ -35,8 +35,8 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password, role) => {
     try {
       await authClient.login(username, password);
-      setAccessToken(authClient.accessToken);
-      fetchUserData(authClient.accessToken, role);
+      setAccessToken(localStorage.getItem("accessToken"));
+      fetchUserData(localStorage.getItem("accessToken"), role);
     } catch (error) {
       console.error("Login failed:", error.message);
     }

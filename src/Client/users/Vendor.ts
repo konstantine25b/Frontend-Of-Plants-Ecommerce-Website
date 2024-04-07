@@ -57,14 +57,17 @@ export class VendorClient {
       if (!accessToken) {
         throw new Error("Access token is missing");
       }
+      this.accessToken=accessToken
 
-      const decodedToken = this.decodeToken(accessToken);
+      const decodedToken = this.decodeToken(this.accessToken);
+ 
 
       if (!decodedToken || !decodedToken.user_id) {
         throw new Error("Invalid token or missing user ID");
       }
 
       const userId = decodedToken.user_id;
+      
 
       const response: AxiosResponse<VendorUser> = await this.axiosInstance.get(
         `/api/user/vendors/${userId}`,
