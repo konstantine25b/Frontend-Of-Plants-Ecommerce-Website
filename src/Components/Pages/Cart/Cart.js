@@ -56,15 +56,18 @@ const Cart = () => {
   const cartTotal = useSelector(selectCartTotal);
   const groupedProducts = useSelector(selectGroupedProductsById);
   const { user } = useContext(AuthContext);
-  const handleNavigation= ()=>{
-    console.log(user)
-     if(user){
-      navigate('/Order')
-     }
-     else{
-      navigate('/LogIn')
-     }
-  }
+  const handleNavigation = () => {
+    if (user) {
+      navigate("/Order", {
+        state: {
+          cartTotal: cartTotal,
+          groupedProducts: groupedProducts,
+        },
+      });
+    } else {
+      navigate("/LogIn");
+    }
+  };
 
   return (
     <Container>
@@ -77,7 +80,9 @@ const Cart = () => {
         <TotalAmount>Total: ${cartTotal}</TotalAmount>
       </TotalContainer>
       <ButtonDiv>
-        <GoToOrderButton onClick={()=>handleNavigation()} >Proceed to checkout</GoToOrderButton>
+        <GoToOrderButton onClick={() => handleNavigation()}>
+          Proceed to checkout
+        </GoToOrderButton>
       </ButtonDiv>
     </Container>
   );

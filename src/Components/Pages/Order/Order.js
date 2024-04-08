@@ -3,7 +3,8 @@ import { clientOrder } from "../../../Client/order/Order";
 import styled from "@emotion/styled";
 import COLORS from "../../styles/Colors";
 import AuthContext from "../../../Contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { clientOrderItems } from "../../../Client/order/OrderItems";
 
 const FormContainer = styled.div`
   max-width: 400px;
@@ -42,6 +43,33 @@ const Order = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [message, setMessage] = useState({ text: "", success: false });
+  const { state } = useLocation();
+  const { cartTotal, groupedProducts } = state;
+  console.log(cartTotal, groupedProducts);
+
+  const createOrderItems = async (data) => {
+    try {
+      const authToken = localStorage.getItem("accessToken");
+      if (!authToken) {
+        throw new Error("User not authenticated. Access token missing.");
+      }
+      const orderItemData = {
+        order: data.orderId, // Replace orderId with the actual order ID
+        product: data.productId, // Replace productId with the actual product ID
+        quantity: data.quantity,
+        customer: user.id,
+      };
+
+      const createdOrderItem = await clientOrderItems.createOrder(
+        { orderItemData }, // Corrected key name to match the backend
+        authToken
+      );
+
+      console.log("Order created successfully:", createdOrderItem);
+    } catch (error) {
+      console.error("Error creating order:", error.message);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +88,7 @@ const Order = () => {
       if (createdOrder) {
         setMessage({ text: "Order created successfully.", success: true });
         // Optionally, you can redirect the user or display a success message
-        navigate("/myorders"); // Redirect to MyOrders page
+        navigate("/MyOrders"); // Redirect to MyOrders page
       } else {
         setMessage({
           text: "Failed to create order. Please try again.",

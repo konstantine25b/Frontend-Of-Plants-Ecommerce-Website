@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { clientProduct } from "../../../Client/products/Product";
 import RightSide from "../SubCategories/RightSide/RightSide";
 import LeftSide from "../SubCategories/LeftSide/LeftSide";
+import { fetchFeaturedDataPage } from "../../../Client/Requests/ProductRequests";
 
 const Container = styled.div`
   display: flex;
@@ -46,32 +47,6 @@ const Component2 = styled.div`
     margin: 0;
   }
 `;
-const fetchData = async (
-  is_featured = true,
-  sizeFilter = undefined,
-  price__gte = undefined,
-  price__lte = undefined,
-  page = 1,
-  dataInfo = [],
-  prevPage = 1
-) => {
-  try {
-    const response = await clientProduct.listProducts(
-      {
-        is_featured: is_featured,
-        size: sizeFilter,
-        price__gte: price__gte,
-        price__lte: price__lte,
-      },
-      page,
-      dataInfo,
-      prevPage
-    );
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
 
 const AllFeatured = () => {
   const [dataInfo, setDataInfo] = useState([]);
@@ -86,7 +61,7 @@ const AllFeatured = () => {
   const { data, isLoading, isError, refetch } = useQuery(
     ["featuredProducts", currentPage, size, price],
     () =>
-      fetchData(
+      fetchFeaturedDataPage(
         true,
         size,
         price.min,

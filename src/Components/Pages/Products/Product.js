@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import { clientProduct } from "../../../Client/products/Product";
-import { clientReview } from "../../../Client/products/Reviews";
 import ProductComponent from "./ProductDetails";
 import styled from "@emotion/styled";
 import ReviewsSection from "./Reviews";
+import { fetchReviews } from "../../../Client/Requests/ReviewRequests";
+import { fetchProduct } from "../../../Client/Requests/ProductRequests";
 
 const Main = styled.div`
   display: flex;
@@ -22,22 +23,8 @@ const Main = styled.div`
   }
 `;
 
-const fetchProduct = async (id) => {
-  try {
-    const response = await clientProduct.getProduct(id);
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
-const fetchReviews = async ({ product: id }) => {
-  try {
-    const response = await clientReview.listReviews({ product: id });
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
+
+
 const fetchBoth = async (productId) => {
   try {
     const productPromise = fetchProduct(productId); // Fetch product

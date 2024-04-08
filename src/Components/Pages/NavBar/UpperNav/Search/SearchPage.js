@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { clientProduct } from "../../../../../Client/products/Product";
 import RightSide from "../../../SubCategories/RightSide/RightSide";
 import LeftSide from "../../../SubCategories/LeftSide/LeftSide";
 import { useLocation } from "react-router-dom";
+import { fetchSearchData } from "../../../../../Client/Requests/ProductRequests";
 
 const Container = styled.div`
   display: flex;
@@ -40,33 +40,6 @@ const Component2 = styled.div`
   }
 `;
 
-const fetchData = async (
-  title = undefined,
-  sizeFilter = undefined,
-  price__gte = undefined,
-  price__lte = undefined,
-  page = 1,
-  dataInfo = [],
-  prevPage = 1
-) => {
-  try {
-    const response = await clientProduct.listProducts(
-      {
-        title: title,
-        size: sizeFilter,
-        price__gte: price__gte,
-        price__lte: price__lte,
-      },
-      page,
-      dataInfo,
-      prevPage
-    );
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
-
 const SearchPage = () => {
   const { state } = useLocation();
   const { title } = state;
@@ -83,7 +56,7 @@ const SearchPage = () => {
   const { data, isLoading, isError, refetch } = useQuery(
     ["searchedProducts", currentPage, size, price],
     () =>
-      fetchData(
+      fetchSearchData(
         title,
         size,
         price.min,

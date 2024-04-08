@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { clientProduct } from "../../../../Client/products/Product";
 import FeaturedProductList from "./FeaturedProductList";
 import { useNavigate } from "react-router-dom";
+import { fetchFeaturedData } from "../../../../Client/Requests/ProductRequests";
 
 const FeaturedProductsContainer = styled.section`
   padding: 3rem 0 1rem 0;
@@ -42,17 +43,6 @@ const Title = styled.div`
   }
 `;
 
-const fetchSubcategoryData = async () => {
-  try {
-    const response = await clientProduct.listProducts({
-      is_featured: true,
-    });
-
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
 
 const FeaturedProducts = () => {
   const [showSeeAll, setShowSeeAll] = useState(false);
@@ -61,7 +51,7 @@ const FeaturedProducts = () => {
 
   const { data, isLoading, isError, refetch } = useQuery(
     ["featuredProducts"],
-    fetchSubcategoryData
+    fetchFeaturedData
   );
   
 

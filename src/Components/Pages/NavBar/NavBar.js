@@ -2,17 +2,9 @@ import { useQuery } from "react-query";
 import LowerNav from "./LowerNav/LowerNav";
 import UpperNavBar from "./UpperNav/UpperNav";
 import { clientCategory } from "../../../Client/products/Categories";
+import { fetchCategories } from "../../../Client/Requests/CategoriesRequests";
 
 
-const fetchCategories = async () => {
-  try {
-    const categories = await clientCategory.listCategories();
-
-    return categories;
-  } catch (error) {
-    throw new Error("Failed to fetch categories");
-  }
-};
 
 const NavBar = () => {
   const {

@@ -9,7 +9,7 @@ const OrderItem = styled.div`
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;
-  cursor: pointer; /* Add pointer cursor for better interactivity */
+
   transition: background-color 0.3s;
   position: relative;
 `;
@@ -30,11 +30,11 @@ const DetailsLink = styled.div`
   position: absolute;
   bottom: 10px;
   right: 10px;
-
-  z-index: 2;
+  cursor: pointer;
+  z-index: 1;
 
   transition: opacity 0.3s;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: ${COLORS.fancyBlue};
   &:hover {
     text-decoration: underline;
@@ -49,7 +49,7 @@ const DeleteButton = styled.button`
   background-color: ${COLORS.fancyRed};
   color: ${COLORS.white};
   border: none;
-  z-index: 2;
+  z-index: 1;
   border-radius: 0.3rem;
   padding: 0.5rem 0.8rem;
   font-size: 0.9rem;

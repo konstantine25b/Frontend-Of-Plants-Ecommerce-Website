@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import styled from "@emotion/styled";
 import COLORS from "../../styles/Colors";
-import { clientReview } from "../../../Client/products/Reviews";
 import AuthContext from "../../../Contexts/AuthContext";
+import { createReview } from "../../../Client/Requests/ReviewRequests";
 
 const ReviewForm = styled.form`
   margin-top: 1.5rem;
@@ -60,7 +60,7 @@ const RatingLabel = styled.label`
   font-weight: bold;
 `;
 
-const AddReview = ({ productId,refetch }) => {
+const AddReview = ({ productId, refetch }) => {
   const { user } = useContext(AuthContext);
   const [newReview, setNewReview] = useState({
     product: productId,
@@ -78,30 +78,11 @@ const AddReview = ({ productId,refetch }) => {
     }));
   };
 
-  const createReview = async (reviewData) => {
-    try {
-      const authToken = localStorage.getItem("accessToken");
-      if (!authToken) {
-        throw new Error("User not authenticated. Access token missing.");
-      }
-
-      const createdReview = await clientReview.createReview(
-        reviewData,
-        authToken
-      );
-      refetch()
-      console.log("Review created successfully:", createdReview);
-    } catch (error) {
-      console.error("Error creating review:", error.message);
-      // Handle error appropriately, such as displaying an error message to the user
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add your logic here to handle the submission of the new review
     console.log("Submitted review:", newReview);
-    createReview(newReview);
+    createReview(newReview, refetch);
 
     // Clear the form after submission
     setNewReview({

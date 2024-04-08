@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/outline";
 import styled from "@emotion/styled";
 import COLORS from "../../../../styles/Colors";
-import { clientProduct } from "../../../../../Client/products/Product";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { fetchSearchData } from "../../../../../Client/Requests/ProductRequests";
 
 const SearchBar = styled.input`
   width: 100%;
@@ -52,33 +52,6 @@ const SearchBarContainer = styled.form`
   }
 `;
 
-const fetchData = async (
-  title = undefined,
-  sizeFilter = undefined,
-  price__gte = undefined,
-  price__lte = undefined,
-  page = 1,
-  dataInfo = [],
-  prevPage = 1
-) => {
-  try {
-    const response = await clientProduct.listProducts(
-      {
-        title: title,
-        size: sizeFilter,
-        price__gte: price__gte,
-        price__lte: price__lte,
-      },
-      page,
-      dataInfo,
-      prevPage
-    );
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
-
 const Search = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -92,7 +65,7 @@ const Search = () => {
   });
   const { data, refetch } = useQuery(
     ["searchedProducts", currentPage, size, price],
-    () => fetchData(searchTerm),
+    () => fetchSearchData(searchTerm),
     { enabled: false }
   );
 

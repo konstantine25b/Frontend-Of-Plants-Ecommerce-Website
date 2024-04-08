@@ -70,7 +70,7 @@ const Trend = () => {
     data,
     error,
   } = useQuery(["subcategory", Id], () =>
-    subcategoryClient.gatSubcategory(Id)
+    subcategoryClient.getSubcategory(Id)
   );
   
   return (

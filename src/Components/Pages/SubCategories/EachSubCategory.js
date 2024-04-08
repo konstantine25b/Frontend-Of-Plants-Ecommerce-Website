@@ -5,6 +5,7 @@ import { clientProduct } from "../../../Client/products/Product";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import LeftSide from "./LeftSide/LeftSide";
+import { fetchSubcategoryData } from "../../../Client/Requests/ProductRequests";
 
 const Container = styled.div`
   display: flex;
@@ -48,32 +49,7 @@ const Component2 = styled.div`
   }
 `;
 
-const fetchSubcategoryData = async (
-  id,
-  sizeFilter = undefined,
-  price__gte = undefined,
-  price__lte = undefined,
-  page = 1,
-  dataInfo = [],
-  prevPage = 1
-) => {
-  try {
-    const response = await clientProduct.listProducts(
-      {
-        subcategory: id,
-        size: sizeFilter,
-        price__gte: price__gte,
-        price__lte: price__lte,
-      },
-      page,
-      dataInfo,
-      prevPage
-    );
-    return response;
-  } catch (error) {
-    throw new Error("Failed to fetch subcategory data");
-  }
-};
+
 
 const EachSubCategory = () => {
   const { state } = useLocation();
