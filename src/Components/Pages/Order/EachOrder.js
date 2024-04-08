@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import COLORS from "../../styles/Colors";
 import { clientOrder } from "../../../Client/order/Order";
+import { useNavigate } from "react-router-dom";
 
 const OrderItem = styled.div`
   background-color: ${COLORS.primary};
@@ -11,13 +12,6 @@ const OrderItem = styled.div`
   cursor: pointer; /* Add pointer cursor for better interactivity */
   transition: background-color 0.3s;
   position: relative;
-
-  &:hover {
-    .details-link {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  }
 `;
 
 const OrderTitle = styled.h3`
@@ -32,15 +26,16 @@ const OrderDetails = styled.p`
   margin-bottom: 0.3rem;
 `;
 
-const DetailsLink = styled.a`
+const DetailsLink = styled.div`
   position: absolute;
   bottom: 10px;
   right: 10px;
-  color: ${COLORS.fancyBlue};
-  opacity: 0;
-  pointer-events: none;
+
+  z-index: 2;
+
   transition: opacity 0.3s;
   font-size: 1.5rem;
+  color: ${COLORS.fancyBlue};
   &:hover {
     text-decoration: underline;
     color: ${COLORS.hoverBlue};
@@ -57,7 +52,7 @@ const DeleteButton = styled.button`
   z-index: 2;
   border-radius: 0.3rem;
   padding: 0.5rem 0.8rem;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
@@ -77,6 +72,8 @@ const formatTimestamp = (timestamp) => {
 };
 
 const EachOrder = ({ order, refetch }) => {
+  const navigate = useNavigate();
+
   const handleDelete = async () => {
     try {
       const authToken = localStorage.getItem("accessToken");
@@ -101,10 +98,18 @@ const EachOrder = ({ order, refetch }) => {
       <OrderDetails>
         Created At: {formatTimestamp(order.created_at)}
       </OrderDetails>
-      <DetailsLink className="details-link" href="#">
+      <DetailsLink
+        onClick={() =>
+          navigate("/EachOrder", {
+            state: {
+              order: order,
+            },
+          })
+        }
+      >
         See Details
       </DetailsLink>
-      <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
+      <DeleteButton onClick={handleDelete}>Delete Order</DeleteButton>
     </OrderItem>
   );
 };

@@ -78,6 +78,27 @@ export class OrderClient {
       throw new Error("Failed to delete order");
     }
   }
+
+  public async getOrder(
+    orderId: number,
+    authToken: string // Pass the authentication token as a parameter
+  ): Promise<OrderData | null> {
+    const url = `/api/order/orders/${orderId}/`;
+    try {
+      const response: AxiosResponse<OrderData> = await this.axiosInstance.get(
+        url,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`, // Include the authentication token in the request headers
+          },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      console.error(`Failed to fetch order with ID ${orderId}:`, error);
+      return null;
+    }
+  }
 }
 
 // Example usage:
