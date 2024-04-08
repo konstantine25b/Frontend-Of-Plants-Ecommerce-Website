@@ -61,8 +61,24 @@ export class OrderClient {
       return null;
     }
   }
-}
 
+  public async deleteOrder(
+    orderId: number,
+    authToken: string // Pass the authentication token as a parameter
+  ): Promise<void> {
+    const url = `/api/order/orders/${orderId}/`;
+    try {
+      await this.axiosInstance.delete(url, {
+        headers: {
+          Authorization: `Bearer ${authToken}`, // Include the authentication token in the request headers
+        },
+      });
+    } catch (error: any) {
+      console.error("Failed to delete order:", error);
+      throw new Error("Failed to delete order");
+    }
+  }
+}
 
 // Example usage:
 const baseUrl = "http://164.92.170.208";

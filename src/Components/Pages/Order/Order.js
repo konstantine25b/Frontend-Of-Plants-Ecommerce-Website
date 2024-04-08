@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const FormContainer = styled.div`
   max-width: 400px;
   margin: 0 auto;
+  padding-top: 2rem;
 `;
 
 const FormTitle = styled.h2`
