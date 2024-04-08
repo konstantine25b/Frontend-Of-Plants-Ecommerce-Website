@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { createOrder } from "../../../Client/Requests/OrderRequests";
 import OrderItems from "./OrderItems";
 import { useSelector } from "react-redux";
-import { selectCartTotal } from "../../../Redux/Cart";
+import {
+  selectCartTotal,
+  selectGroupedProductsById,
+} from "../../../Redux/Cart";
+import { createOrderItems } from "../../../Client/Requests/OrderItemsRequests";
 
 const FormContainer = styled.div`
   width: 80%;
@@ -33,6 +37,7 @@ const SubmitButton = styled.button`
   border-radius: 0.3rem;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-bottom: 5rem;
 
   &:hover {
     background-color: ${COLORS.hoverBlue};
@@ -67,11 +72,23 @@ const Order = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState({ text: "", success: false });
   const cartTotal = useSelector(selectCartTotal);
+  const groupedProducts = useSelector(selectGroupedProductsById);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createOrder(user.id, setMessage);
-    navigate("/MyOrders"); // Redirect to MyOrders page
+    const order = await createOrder(user.id, setMessage);
+    console.log(order);
+
+    Object.entries(groupedProducts).map((item) => {
+      let data = {
+        orderId: order.id,
+        productId: Number(item[0]),
+        quantity: item[1].length,
+      };
+      console.log(data);
+      createOrderItems(data, user.id);
+    });
+    // navigate("/MyOrders"); // Redirect to MyOrders page
   };
 
   return (

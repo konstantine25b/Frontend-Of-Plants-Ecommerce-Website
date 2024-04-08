@@ -23,7 +23,7 @@ export class OrderItemsClient {
   }
 
   public async create(orderData: any, authToken: string) {
-    const url = `${this.baseUrl}/api/order/items/`;
+    const url = `${this.baseUrl}/api/order/order-items/`;
     try {
       const response: AxiosResponse = await axios.post(url, orderData, {
         headers: {

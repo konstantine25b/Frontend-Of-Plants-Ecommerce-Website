@@ -12,13 +12,14 @@ export const createOrderItems = async (data, userId) => {
       quantity: data.quantity,
       customer: userId,
     };
+    console.log(orderItemData, authToken);
 
-    const createdOrderItem = await clientOrderItems.createOrder(
-      { orderItemData }, // Corrected key name to match the backend
+    const createdOrderItem = await clientOrderItems.create(
+      orderItemData, // Corrected key name to match the backend
       authToken
     );
 
-    console.log("Order created successfully:", createdOrderItem);
+    console.log("Order Item created successfully:", createdOrderItem);
   } catch (error) {
     console.error("Error creating order:", error.message);
   }

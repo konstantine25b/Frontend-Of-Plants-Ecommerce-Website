@@ -13,10 +13,11 @@ export const createOrder = async (userId, setMessage) => {
     );
 
     console.log("Order created successfully:", createdOrder);
+    
     if (createdOrder) {
       setMessage({ text: "Order created successfully.", success: true });
+      return createdOrder;
       // Optionally, you can redirect the user or display a success message
-      
     } else {
       setMessage({
         text: "Failed to create order. Please try again.",
@@ -66,19 +67,19 @@ export const deleteOrder = async (order, navigate) => {
   }
 };
 
-export  const deleteOrderForOrderPage = async (order, refetch) => {
-    try {
-      const authToken = localStorage.getItem("accessToken");
-      if (!authToken) {
-        throw new Error("User not authenticated. Access token missing.");
-      }
-
-      await clientOrder.deleteOrder(order.id, authToken);
-      refetch();
-      // Optionally, you can update the UI to reflect the deleted order
-      window.alert("Order deleted successfully!"); // Display alert after successful deletion
-    } catch (error) {
-      console.error("Error deleting order:", error.message);
-      // Handle error appropriately, such as displaying an error message to the user
+export const deleteOrderForOrderPage = async (order, refetch) => {
+  try {
+    const authToken = localStorage.getItem("accessToken");
+    if (!authToken) {
+      throw new Error("User not authenticated. Access token missing.");
     }
-  };
+
+    await clientOrder.deleteOrder(order.id, authToken);
+    refetch();
+    // Optionally, you can update the UI to reflect the deleted order
+    window.alert("Order deleted successfully!"); // Display alert after successful deletion
+  } catch (error) {
+    console.error("Error deleting order:", error.message);
+    // Handle error appropriately, such as displaying an error message to the user
+  }
+};
