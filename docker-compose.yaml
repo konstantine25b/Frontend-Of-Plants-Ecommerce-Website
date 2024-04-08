@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  my-react-app:
+    container_name: my-react-app
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    stdin_open: true
+    tty: true

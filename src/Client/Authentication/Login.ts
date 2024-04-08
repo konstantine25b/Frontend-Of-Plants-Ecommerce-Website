@@ -144,6 +144,7 @@ export class AuthClient {
 
       // Check if new access token is received
       if (response.data.access) {
+        this.refreshToken=response.data.refresh;
         this.accessToken = response.data.access;
         this.saveTokensToStorage();
         this.scheduleTokenRefresh();
