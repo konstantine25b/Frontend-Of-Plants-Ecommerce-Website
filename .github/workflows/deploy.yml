@@ -19,7 +19,4 @@ jobs:
           node-version: '18.17.1'
       - name: Install dependencies
         run: npm install
-  deploy:
-      runs-on: ubuntu-latest
-      needs: build
-      environment: production
+ 
