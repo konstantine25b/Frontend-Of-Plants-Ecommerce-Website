@@ -4,6 +4,7 @@ import COLORS from "../../styles/Colors";
 import { clientOrder } from "../../../Client/order/Order";
 import EachOrder from "./EachOrder";
 import { useQuery } from "react-query";
+import { fetchOrders } from "../../../Client/Requests/OrderRequests";
 
 const OrdersContainer = styled.div`
   max-width: 800px;
@@ -23,19 +24,6 @@ const LoadingMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const fetchOrders = async () => {
-  try {
-    const authToken = localStorage.getItem("accessToken");
-    if (!authToken) {
-      throw new Error("User not authenticated. Access token missing.");
-    }
-
-    const fetchedOrders = await clientOrder.listOrders(authToken);
-    return fetchedOrders;
-  } catch (error) {
-    throw new Error("Failed to fetch product and reviews");
-  }
-};
 const MyOrders = () => {
   const { data, isLoading, isError, refetch } = useQuery(["MyOrders"], () =>
     fetchOrders()

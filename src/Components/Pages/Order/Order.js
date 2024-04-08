@@ -5,6 +5,7 @@ import COLORS from "../../styles/Colors";
 import AuthContext from "../../../Contexts/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { clientOrderItems } from "../../../Client/order/OrderItems";
+import { createOrder } from "../../../Client/Requests/OrderRequests";
 
 const FormContainer = styled.div`
   max-width: 400px;
@@ -47,62 +48,9 @@ const Order = () => {
   const { cartTotal, groupedProducts } = state;
   console.log(cartTotal, groupedProducts);
 
-  const createOrderItems = async (data) => {
-    try {
-      const authToken = localStorage.getItem("accessToken");
-      if (!authToken) {
-        throw new Error("User not authenticated. Access token missing.");
-      }
-      const orderItemData = {
-        order: data.orderId, // Replace orderId with the actual order ID
-        product: data.productId, // Replace productId with the actual product ID
-        quantity: data.quantity,
-        customer: user.id,
-      };
-
-      const createdOrderItem = await clientOrderItems.createOrder(
-        { orderItemData }, // Corrected key name to match the backend
-        authToken
-      );
-
-      console.log("Order created successfully:", createdOrderItem);
-    } catch (error) {
-      console.error("Error creating order:", error.message);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const authToken = localStorage.getItem("accessToken");
-      if (!authToken) {
-        throw new Error("User not authenticated. Access token missing.");
-      }
-
-      const createdOrder = await clientOrder.createOrder(
-        { customer: user.id }, // Corrected key name to match the backend
-        authToken
-      );
-
-      console.log("Order created successfully:", createdOrder);
-      if (createdOrder) {
-        setMessage({ text: "Order created successfully.", success: true });
-        // Optionally, you can redirect the user or display a success message
-        navigate("/MyOrders"); // Redirect to MyOrders page
-      } else {
-        setMessage({
-          text: "Failed to create order. Please try again.",
-          success: false,
-        });
-      }
-    } catch (error) {
-      console.error("Error creating order:", error.message);
-      setMessage({
-        text: "Failed to create order. Please try again.",
-        success: false,
-      });
-      // Handle error appropriately, such as displaying an error message to the user
-    }
+    createOrder(user.id, setMessage);
   };
 
   return (

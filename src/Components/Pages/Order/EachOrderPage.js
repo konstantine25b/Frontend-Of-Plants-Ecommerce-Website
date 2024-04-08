@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { useLocation, useNavigate } from "react-router-dom";
 import { clientOrder } from "../../../Client/order/Order";
 import COLORS from "../../styles/Colors";
+import { deleteOrder } from "../../../Client/Requests/OrderRequests";
 
 const Container = styled.div`
   max-width: 600px;
@@ -59,25 +60,6 @@ const EachOrderPage = () => {
   const { state } = useLocation();
   const { order } = state;
   const navigate = useNavigate();
-  const handleDelete = async (order) => {
-    try {
-      const authToken = localStorage.getItem("accessToken");
-      if (!authToken) {
-        throw new Error("User not authenticated. Access token missing.");
-      }
-
-      const deleted = await clientOrder.deleteOrder(order.id, authToken);
-
-      navigate("/MyOrders");
-
-      // Optionally, you can update the UI to reflect the deleted order
-      window.alert("Order deleted successfully!"); // Display alert after successful deletion
-    } catch (error) {
-      console.error("Error deleting order:", error.message);
-      // Handle error appropriately, such as displaying an error message to the user
-    }
-  };
-
   return (
     <Container>
       <Title>Order Details</Title>
@@ -89,7 +71,7 @@ const EachOrderPage = () => {
         <DetailLabel>Created At:</DetailLabel>
         <DetailValue>{formatTimestamp(order.created_at)}</DetailValue>
       </OrderDetails>
-      <DeleteButton onClick={() => handleDelete(order)}>
+      <DeleteButton onClick={() => deleteOrder(order, navigate)}>
         Delete Order
       </DeleteButton>
     </Container>

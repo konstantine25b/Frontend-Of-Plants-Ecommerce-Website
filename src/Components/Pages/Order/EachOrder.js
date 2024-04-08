@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import COLORS from "../../styles/Colors";
 import { clientOrder } from "../../../Client/order/Order";
 import { useNavigate } from "react-router-dom";
+import { deleteOrderForOrderPage } from "../../../Client/Requests/OrderRequests";
 
 const OrderItem = styled.div`
   background-color: ${COLORS.primary};
@@ -74,23 +75,6 @@ const formatTimestamp = (timestamp) => {
 const EachOrder = ({ order, refetch }) => {
   const navigate = useNavigate();
 
-  const handleDelete = async () => {
-    try {
-      const authToken = localStorage.getItem("accessToken");
-      if (!authToken) {
-        throw new Error("User not authenticated. Access token missing.");
-      }
-
-      await clientOrder.deleteOrder(order.id, authToken);
-      refetch();
-      // Optionally, you can update the UI to reflect the deleted order
-      window.alert("Order deleted successfully!"); // Display alert after successful deletion
-    } catch (error) {
-      console.error("Error deleting order:", error.message);
-      // Handle error appropriately, such as displaying an error message to the user
-    }
-  };
-
   return (
     <OrderItem key={order.id}>
       <OrderTitle>Order ID: {order.id}</OrderTitle>
@@ -109,7 +93,9 @@ const EachOrder = ({ order, refetch }) => {
       >
         See Details
       </DetailsLink>
-      <DeleteButton onClick={handleDelete}>Delete Order</DeleteButton>
+      <DeleteButton onClick={() => deleteOrderForOrderPage(order, refetch)}>
+        Delete Order
+      </DeleteButton>
     </OrderItem>
   );
 };
