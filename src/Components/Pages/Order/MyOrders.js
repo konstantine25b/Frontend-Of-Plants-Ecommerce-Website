@@ -34,7 +34,7 @@ const MyOrders = () => {
       <h2 style={{ textAlign: "center", marginBottom: "2rem" }}>My Orders</h2>
       {isLoading && <LoadingMessage>Loading orders...</LoadingMessage>}
       {isError && <ErrorMessage>{isError}</ErrorMessage>}
-      {!isLoading &&
+      {!isLoading &&data!=null &&
         !isError &&
         Array.isArray(data.results) &&
         data.results.map((order) => (
