@@ -16,7 +16,7 @@ export const createOrder = async (userId, setMessage) => {
     if (createdOrder) {
       setMessage({ text: "Order created successfully.", success: true });
       // Optionally, you can redirect the user or display a success message
-      // navigate("/MyOrders"); // Redirect to MyOrders page
+      
     } else {
       setMessage({
         text: "Failed to create order. Please try again.",

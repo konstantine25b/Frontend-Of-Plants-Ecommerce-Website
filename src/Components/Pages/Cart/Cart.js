@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectCartTotal,
   selectGroupedProductsById,
@@ -58,12 +58,7 @@ const Cart = () => {
   const { user } = useContext(AuthContext);
   const handleNavigation = () => {
     if (user) {
-      navigate("/Order", {
-        state: {
-          cartTotal: cartTotal,
-          groupedProducts: groupedProducts,
-        },
-      });
+      navigate("/Order");
     } else {
       navigate("/LogIn");
     }
