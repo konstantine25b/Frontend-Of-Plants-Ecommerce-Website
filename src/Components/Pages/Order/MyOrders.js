@@ -10,6 +10,7 @@ const OrdersContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding-top: 2rem;
+
 `;
 
 const ErrorMessage = styled.div`
@@ -34,7 +35,8 @@ const MyOrders = () => {
       <h2 style={{ textAlign: "center", marginBottom: "2rem" }}>My Orders</h2>
       {isLoading && <LoadingMessage>Loading orders...</LoadingMessage>}
       {isError && <ErrorMessage>{isError}</ErrorMessage>}
-      {!isLoading &&data!=null &&
+      {!isLoading &&
+        data != null &&
         !isError &&
         Array.isArray(data.results) &&
         data.results.map((order) => (

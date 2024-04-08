@@ -5,8 +5,9 @@ import AuthContext from "../../../Contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { createOrder } from "../../../Client/Requests/OrderRequests";
 import OrderItems from "./OrderItems";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  removeEveryThingFromCart,
   selectCartTotal,
   selectGroupedProductsById,
 } from "../../../Redux/Cart";
@@ -73,11 +74,11 @@ const Order = () => {
   const [message, setMessage] = useState({ text: "", success: false });
   const cartTotal = useSelector(selectCartTotal);
   const groupedProducts = useSelector(selectGroupedProductsById);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const order = await createOrder(user.id, setMessage);
-    console.log(order);
 
     Object.entries(groupedProducts).map((item) => {
       let data = {
@@ -85,10 +86,11 @@ const Order = () => {
         productId: Number(item[0]),
         quantity: item[1].length,
       };
-      console.log(data);
+
       createOrderItems(data, user.id);
     });
-    // navigate("/MyOrders"); // Redirect to MyOrders page
+    dispatch(removeEveryThingFromCart());
+    navigate("/MyOrders"); // Redirect to MyOrders page
   };
 
   return (

@@ -7,21 +7,6 @@ export class OrderItemsClient {
     this.baseUrl = baseUrl;
   }
 
-  public async list(authToken: string) {
-    const url = `${this.baseUrl}/api/order/items/`;
-    try {
-      const response: AxiosResponse = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Failed to fetch order items:', error);
-      throw new Error('Failed to fetch order items');
-    }
-  }
-
   public async create(orderData: any, authToken: string) {
     const url = `${this.baseUrl}/api/order/order-items/`;
     try {
@@ -32,13 +17,13 @@ export class OrderItemsClient {
       });
       return response.data;
     } catch (error) {
-      console.error('Failed to create order item:', error);
-      throw new Error('Failed to create order item');
+      console.error("Failed to create order item:", error);
+      throw new Error("Failed to create order item");
     }
   }
 
-  public async retrieve(orderId: number, authToken: string) {
-    const url = `${this.baseUrl}/api/order/items/${orderId}/`;
+  public async retrieve(orderItemId: number, authToken: string) {
+    const url = `${this.baseUrl}/api/order/order-items/${orderItemId}/`;
     try {
       const response: AxiosResponse = await axios.get(url, {
         headers: {
@@ -47,37 +32,22 @@ export class OrderItemsClient {
       });
       return response.data;
     } catch (error) {
-      console.error('Failed to retrieve order item:', error);
-      throw new Error('Failed to retrieve order item');
+      console.error("Failed to retrieve order item:", error);
+      throw new Error("Failed to retrieve order item");
     }
   }
-
-  public async update(orderId: number, orderData: any, authToken: string) {
-    const url = `${this.baseUrl}/api/order/items/${orderId}/`;
+  public async retrieveByOrderId(orderId: number, authToken: string) {
+    const url = `${this.baseUrl}/api/order/order-items/?order=${orderId}`;
     try {
-      const response: AxiosResponse = await axios.put(url, orderData, {
+      const response: AxiosResponse = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
       });
       return response.data;
     } catch (error) {
-      console.error('Failed to update order item:', error);
-      throw new Error('Failed to update order item');
-    }
-  }
-
-  public async delete(orderId: number, authToken: string) {
-    const url = `${this.baseUrl}/api/order/items/${orderId}/`;
-    try {
-      await axios.delete(url, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-    } catch (error) {
-      console.error('Failed to delete order item:', error);
-      throw new Error('Failed to delete order item');
+      console.error("Failed to retrieve order item:", error);
+      throw new Error("Failed to retrieve order item");
     }
   }
 }

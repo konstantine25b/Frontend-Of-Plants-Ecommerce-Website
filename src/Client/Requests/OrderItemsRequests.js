@@ -24,3 +24,18 @@ export const createOrderItems = async (data, userId) => {
     console.error("Error creating order:", error.message);
   }
 };
+
+export const fetchOrderItemsByOrderId = async (orderId) => {
+  try {
+    const authToken = localStorage.getItem("accessToken");
+    if (!authToken) {
+      throw new Error("User not authenticated. Access token missing.");
+    }
+   
+    const fetchedOrderItems = await clientOrderItems.retrieveByOrderId(orderId,authToken);
+   
+    return fetchedOrderItems;
+  } catch (error) {
+    console.error("Error creating order:", error.message);
+  }
+};

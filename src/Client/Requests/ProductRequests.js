@@ -104,6 +104,7 @@ export const fetchFeaturedData = async () => {
   }
 };
 
+
 export const fetchData = async (
   sizeFilter = undefined,
   price__gte = undefined,
