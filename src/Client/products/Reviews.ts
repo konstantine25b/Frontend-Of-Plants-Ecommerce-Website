@@ -78,7 +78,7 @@ export class ReviewClient {
     reviewData: CreateReviewData,
     authToken: string // Pass the authentication token as a parameter
   ): Promise<ReviewData | null> {
-    console.log(reviewData, authToken);
+   
     const url = `/api/review/reviews/`;
     try {
       const response: AxiosResponse<ReviewData> = await this.axiosInstance.post(
@@ -96,6 +96,7 @@ export class ReviewClient {
       return null;
     }
   }
+  
   // Other methods for create, update, delete reviews can be added here
 
   private handleRequestError(error: any): void {

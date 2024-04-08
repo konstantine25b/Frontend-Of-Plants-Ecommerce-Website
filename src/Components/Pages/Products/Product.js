@@ -63,7 +63,6 @@ const Product = () => {
     ["data", product],
     () => fetchBoth(product.id)
   );
-  console.log(data);
 
   let totalRating = data?.reviews?.results.reduce(
     (acc, review) => acc + review.rating,
@@ -91,7 +90,11 @@ const Product = () => {
         rating={rating}
         reviewCount={data?.reviews?.count}
       />
-      <ReviewsSection productId ={data.product.id} reviews={data?.reviews?.results} refetch={refetch}/>
+      <ReviewsSection
+        productId={data.product.id}
+        reviews={data?.reviews?.results}
+        refetch={refetch}
+      />
     </Main>
   );
 };

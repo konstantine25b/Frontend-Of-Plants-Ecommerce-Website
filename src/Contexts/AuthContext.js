@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate(); // Use useNavigate for navigation
 
   useEffect(() => {
-    console.log(JSON.parse(localStorage.getItem("user")));
     let prevUser = JSON.parse(localStorage.getItem("user"));
     if (prevUser) {
       fetchUserData(localStorage.getItem("accessToken"), prevUser.role);
@@ -29,7 +28,6 @@ export const AuthProvider = ({ children }) => {
           : await clientVendors.getVendor(accessToken);
 
       if (userData) {
-        console.log("User data:", userData);
         setUser(userData);
 
         localStorage.setItem("user", JSON.stringify(userData));

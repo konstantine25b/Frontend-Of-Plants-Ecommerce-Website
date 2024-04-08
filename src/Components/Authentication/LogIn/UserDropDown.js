@@ -78,7 +78,7 @@ const UserDropDown = () => {
         </IconContainer>
         <OptionText>Account Details</OptionText>
       </Option>
-      <Option onClick={() => alert("See Your Orders")}>
+      <Option onClick={() => navigate("/MyOrders")}>
         <IconContainer>
           <ViewListIcon width="1.5rem" />
         </IconContainer>
