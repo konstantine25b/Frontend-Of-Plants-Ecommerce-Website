@@ -11,14 +11,6 @@ export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null);
   const [user, setUser] = useState(null);
   const navigate = useNavigate(); // Use useNavigate for navigation
-
-  useEffect(() => {
-    let prevUser = JSON.parse(localStorage.getItem("user"));
-    if (prevUser) {
-      fetchUserData(localStorage.getItem("accessToken"), prevUser.role);
-    }
-  }, []);
-
   async function fetchUserData(accessToken, role) {
     try {
       // Call the appropriate client method based on the role
@@ -40,6 +32,15 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+
+  useEffect(() => {
+    let prevUser = JSON.parse(localStorage.getItem("user"));
+    if (prevUser) {
+      fetchUserData(localStorage.getItem("accessToken"), prevUser.role);
+    }
+  }, []);
+
+ 
   const login = async (username, password, role) => {
     try {
       await authClient.login(username, password);
