@@ -1,47 +1,53 @@
-# Getting Started with Create React App
+# Plants E-commerce Marketplace
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a full-stack e-commerce marketplace project built with React.js and Django Rest Framework. The project allows customers to browse and purchase products from vendors, while vendors can manage their products and customer orders.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Authentication**: Users can sign up and log in using Simple JWT tokens.
+- **Product Browsing**: Customers can browse products organized by categories and subcategories. Products are paginated and can be filtered by price, size, and other attributes.
+- **Product Management**: Vendors can add new products, manage existing ones, and view customer orders.
+- **Rating and Reviews**: Users can rate and leave reviews for products.
+- **Search Functionality**: Users can search for products by name or attributes.
+- **Shopping Cart**: Users can add items to their cart and place orders.
+- **Account Management**: Users have access to their account details and order history.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**:
+  - React.js
+  - Redux
+  - React Query
+  - TypeScript
+  - Reach Router DOM
+ 
+## Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. Clone the repository:
+git clone https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website
+2. Install dependencies:
+cd frontend-of-plants-ecommerce-website
+npm install
+3. Run the development server:
+npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contributors
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Konstantin Bakhutashvili (https://github.com/konstantine25b)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## License
 
-### `npm run eject`
+This project is licensed under the [MIT License](LICENSE).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# Frontend-Of-Plants-Ecommerce-website
