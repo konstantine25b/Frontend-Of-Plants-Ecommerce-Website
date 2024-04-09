@@ -32,22 +32,22 @@ const Profile = () => {
       </h2>
       <UserDetails>
         <p>
-          <Label>Username:</Label> {user.username}
+          <Label>Username:</Label> {user?.username}
         </p>
         <p>
-          <Label>Email:</Label> {user.email}
+          <Label>Email:</Label> {user?.email}
         </p>
         <p>
-          <Label>First Name:</Label> {user.first_name}
+          <Label>First Name:</Label> {user?.first_name}
         </p>
         <p>
-          <Label>Last Name:</Label> {user.last_name}
+          <Label>Last Name:</Label> {user?.last_name}
         </p>
         <p>
-          <Label>Phone Number:</Label> {user.phone_number}
+          <Label>Phone Number:</Label> {user?.phone_number}
         </p>
         <p>
-          <Label>Role:</Label> {user.role}
+          <Label>Role:</Label> {user?.role}
         </p>
       </UserDetails>
     </ProfileContainer>
