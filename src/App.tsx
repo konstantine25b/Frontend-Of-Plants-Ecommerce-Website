@@ -11,13 +11,13 @@ import Product from "./Components/Pages/Products/Product";
 import Home from "./Components/Pages/Home/Home";
 import AllFeatured from "./Components/Pages/AllFeatured/AllFeatured";
 import AllProductsPage from "./Components/Pages/AllProductsPage/AllProductsPage";
-import LastItems from "./Components/Pages/LastItems.js/LastItems";
+import LastItems from "./Components/Pages/LastItems/LastItems";
 import SearchPage from "./Components/Pages/NavBar/UpperNav/Search/SearchPage";
 import Cart from "./Components/Pages/Cart/Cart";
 import Login from "./Components/Authentication/LogIn/Login";
 import SignUp from "./Components/Authentication/SignUp/SignUp";
 import Order from "./Components/Pages/Order/Order";
-import Profile from "./Components/Authentication/Profile/Profile";
+// import Profile from "./Components/Authentication/Profile/Profile";
 import MyOrders from "./Components/Pages/Order/MyOrders";
 import EachOrderPage from "./Components/Pages/Order/EachOrderPage";
 
@@ -34,7 +34,7 @@ const router = createBrowserRouter(
       <Route path="/Cart" element={<Cart />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />} />
-      <Route path="/Profile" element={<Profile/>} />
+      {/* <Route path="/Profile" element={<Profile/>} /> */}
       <Route path="/Order" element={<Order />} />
       <Route path="/MyOrders" element={<MyOrders />} />
       <Route path="/EachOrder" element={<EachOrderPage/>} />
