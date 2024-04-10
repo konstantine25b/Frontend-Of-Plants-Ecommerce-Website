@@ -31,9 +31,9 @@ This is a full-stack e-commerce marketplace project built with React.js and Djan
 
 1. Clone the repository:
 git clone https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website
-2. Install dependencies:
+2. Navigate to the project directory:
 cd frontend-of-plants-ecommerce-website
-
+3.  Install dependencies:
 npm install
 4. Run the development server:
 npm start
