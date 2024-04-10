@@ -20,7 +20,10 @@ This is a full-stack e-commerce marketplace project built with React.js and Djan
   - React Query
   - TypeScript
   - Reach Router DOM
- 
+
+- **Other**:
+  - Docker
+    
 ## Getting Started
 
 ### Prerequisites
@@ -28,6 +31,7 @@ This is a full-stack e-commerce marketplace project built with React.js and Djan
 - Node.js
 
 ### Installation
+#### Method 1: Using npm
 
 1. Clone the repository:
 git clone https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website
@@ -37,6 +41,18 @@ cd frontend-of-plants-ecommerce-website
 npm install
 4. Run the development server:
 npm start
+
+#### Method 2: Using Docker
+
+1. Clone the repository:
+git clone https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website
+2. Navigate to the project directory:
+cd frontend-of-plants-ecommerce-website
+3. Run Docker Compose build:
+docker-compose build
+4. Run Docker Compose up:
+docker-compose up
+
 
 ## Contributors
 
