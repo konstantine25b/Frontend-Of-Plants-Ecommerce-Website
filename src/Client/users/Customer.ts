@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from "axios";
+import { baseUrl } from "../BaseUrl";
 
 interface BaseUser {
   username: string;
@@ -100,5 +101,5 @@ export class CustomerClient {
 }
 
 // Instantiate CustomerClient
-const baseUrl = "http://164.92.170.208";
+
 export const clientCustomers = new CustomerClient(baseUrl);

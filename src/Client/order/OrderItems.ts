@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { baseUrl } from "../BaseUrl";
 
 export class OrderItemsClient {
   private baseUrl: string;
@@ -52,5 +53,5 @@ export class OrderItemsClient {
   }
 }
 
-const baseUrl = "http://164.92.170.208";
+
 export const clientOrderItems = new OrderItemsClient(baseUrl);

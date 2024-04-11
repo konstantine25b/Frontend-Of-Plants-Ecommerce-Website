@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { baseUrl } from "../BaseUrl";
 
 interface SubcategoryData {
   id: number;
@@ -58,5 +59,5 @@ export class SubcategoryClient {
 }
 
 // Example usage:
-const baseUrl = "http://164.92.170.208";
+
 export const subcategoryClient = new SubcategoryClient(baseUrl);

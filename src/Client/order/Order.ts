@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { baseUrl } from "../BaseUrl";
 
 interface OrderData {
   id: number;
@@ -102,5 +103,5 @@ export class OrderClient {
 }
 
 // Example usage:
-const baseUrl = "http://164.92.170.208";
+
 export const clientOrder = new OrderClient(baseUrl);

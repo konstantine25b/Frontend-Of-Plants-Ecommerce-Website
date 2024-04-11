@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { baseUrl } from "../BaseUrl";
 
 interface ReviewData {
   id: number;
@@ -113,5 +114,5 @@ export class ReviewClient {
 }
 
 // Example usage:
-const baseUrl = "http://164.92.170.208";
+
 export const clientReview = new ReviewClient(baseUrl);

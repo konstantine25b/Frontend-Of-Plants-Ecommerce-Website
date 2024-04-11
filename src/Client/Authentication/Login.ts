@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { baseUrl } from "../BaseUrl";
 
 interface AuthTokens {
   access: string;
@@ -172,5 +173,5 @@ export class AuthClient {
 }
 
 // Instantiate AuthClient with base URL
-const baseUrl = "http://164.92.170.208";
+
 export const authClient = new AuthClient(baseUrl);

@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { baseUrl } from "../BaseUrl";
 
 interface CategoryData {
   title: string;
@@ -39,5 +40,5 @@ export class CategoryClient {
 }
 
 // Instantiate CustomerClient
-const baseUrl = "http://164.92.170.208";
+
 export const clientCategory = new CategoryClient(baseUrl);
