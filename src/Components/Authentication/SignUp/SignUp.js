@@ -132,6 +132,7 @@ const Signup = () => {
         .then((createdVendor) => {
           if (createdVendor) {
             console.log("New vendor created:", createdVendor);
+            handleLogin(formData.username, formData.password,formData.role);
           } else {
             console.error("Failed to create vendor");
           }
