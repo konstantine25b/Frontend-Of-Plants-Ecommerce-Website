@@ -23,7 +23,12 @@ This is a full-stack e-commerce marketplace project built with React.js and Djan
 
 - **Other**:
   - Docker
-    
+
+## The backend of this app using Django REST Framework (DRF) is hosted on DigitalOcean.
+
+### Domain: api.apikosaplants.online
+### IP Address: 164.92.170.208
+
 ## Getting Started
 
 ### Prerequisites
