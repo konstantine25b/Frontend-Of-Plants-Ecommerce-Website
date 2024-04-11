@@ -13,7 +13,7 @@ const SearchBar = styled.input`
   border-radius: 0.3125rem; /* Converted from 5px to rem */
   margin: 0 1.25rem 0 0; /* Converted from 0 20px 0 0 to rem */
   outline: none; /* Remove default focus styles */
-  background-color: ${COLORS.mainBackground}; /* Set background color */
+  background-color: ${COLORS.white}; /* Set background color */
   color: ${COLORS.text}; /* Set text color */
   position: relative; /* Set position to relative */
   transition: border-color 0.3s; /* Add transition effect */
