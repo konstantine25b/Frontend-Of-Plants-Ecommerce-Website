@@ -21,6 +21,7 @@ import Profile from "./Components/Authentication/Profile/Profile";
 import MyOrders from "./Components/Pages/Order/MyOrders";
 import EachOrderPage from "./Components/Pages/Order/EachOrderPage";
 import MyProducts from "./Components/Pages/Vendors/MyProducts/MyProducts";
+import AddProduct from "./Components/Pages/Vendors/MyProducts/AddProduct";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +41,8 @@ const router = createBrowserRouter(
       <Route path="/MyOrders" element={<MyOrders />} />
       <Route path="/EachOrder" element={<EachOrderPage />} />
       <Route path="/MyProducts" element={<MyProducts/>} />
+      <Route path="/AddProduct" element={<AddProduct/>} />
+
     </Route>
   )
 );

@@ -4,6 +4,20 @@ import { baseUrl } from "../BaseUrl";
 interface ProductData {
   id: number;
   title: string;
+  vendor: string;
+  subcategory: string;
+  description: string;
+  price: number;
+  quantity: number;
+  image_url: string;
+  size?: string;
+  is_featured?: boolean;
+  is_active?: boolean;
+}
+interface NewProductData {
+  title: string;
+  vendor: string;
+  subcategory: string;
   description: string;
   price: number;
   quantity: number;
@@ -15,6 +29,7 @@ interface ProductData {
 
 interface ProductFilters {
   title?: string;
+  vendor?: string;
   subcategory?: string;
   price__gte?: number;
   price__lte?: number;
@@ -124,6 +139,26 @@ export class ProductClient {
       const response: AxiosResponse<ProductData> = await this.axiosInstance.get(
         url
       );
+
+      return response.data;
+    } catch (error: any) {
+      this.handleRequestError(error);
+      return null;
+    }
+  }
+  public async addProduct(
+    newProduct: NewProductData,
+    authToken: string // Pass the authentication token as a parameter
+  ): Promise<ProductData | null> {
+    const url = "/api/product/products/";
+
+    try {
+      const response: AxiosResponse<ProductData> =
+        await this.axiosInstance.post(url, newProduct, {
+          headers: {
+            Authorization: `Bearer ${authToken}`, // Include the authentication token in the request headers
+          },
+        });
 
       return response.data;
     } catch (error: any) {

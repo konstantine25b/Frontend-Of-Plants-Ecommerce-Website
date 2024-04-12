@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import COLORS from "../../styles/Colors";
-import { clientOrder } from "../../../Client/order/Order";
 import EachOrder from "./EachOrder";
 import { useQuery } from "react-query";
 import { fetchOrders } from "../../../Client/Requests/OrderRequests";
