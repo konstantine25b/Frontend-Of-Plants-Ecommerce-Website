@@ -112,6 +112,15 @@ docker-compose up
 <img width="1440" alt="Screenshot 2024-04-10 at 14 43 20" src="https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website/assets/102245292/dfdb2ed5-a709-49f8-955a-88a3ba4b1a63">
 <img width="1440" alt="Screenshot 2024-04-10 at 14 43 24" src="https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website/assets/102245292/6e2d3f20-fd36-4412-9016-75e709b140c1">
 
+### We have Vendor Platform for adding Products
+
+<img width="1440" alt="Screenshot 2024-04-12 at 18 23 24" src="https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website/assets/102245292/3c818e1b-998e-471a-b860-f32cf20a0cf9">
+
+### Vendor is able to add new products and also see deatils of each product
+
+<img width="1440" alt="Screenshot 2024-04-12 at 18 24 06" src="https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website/assets/102245292/56db16a6-d76d-4f69-9811-3893d7ef0373">
+<img width="1440" alt="Screenshot 2024-04-12 at 18 24 18" src="https://github.com/konstantine25b/Frontend-Of-Plants-Ecommerce-website/assets/102245292/7d179eb7-d588-4ff5-b259-71bf7d4c3761">
+
 
 ## Explore Full Functionality 
 For a comprehensive understanding of the capabilities offered to both users and vendors, I encourage you to install my project and test its features firsthand.
