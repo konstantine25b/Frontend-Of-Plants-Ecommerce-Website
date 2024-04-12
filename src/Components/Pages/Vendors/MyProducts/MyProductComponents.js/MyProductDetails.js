@@ -33,6 +33,10 @@ const MyProductDetails = () => {
         <DetailValue>{product.title}</DetailValue>
       </ProductDetailItem>
       <ProductDetailItem>
+        <DetailLabel>Subcategory:</DetailLabel>
+        <DetailValue>{product.subcategory} </DetailValue>
+      </ProductDetailItem>
+      <ProductDetailItem>
         <DetailLabel>Description:</DetailLabel>
         <DetailValue>{product.description}</DetailValue>
       </ProductDetailItem>
