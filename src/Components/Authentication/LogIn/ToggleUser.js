@@ -73,7 +73,7 @@ const ToggleUser = ({ user }) => {
           <UserIcon width="1.3rem" /> {/* User icon */}
         </IconContainer>
       </ActionButton>
-      {isOpen && <UserDropDown />}
+      {isOpen && <UserDropDown user ={user}/>}
     </Container>
   );
 };

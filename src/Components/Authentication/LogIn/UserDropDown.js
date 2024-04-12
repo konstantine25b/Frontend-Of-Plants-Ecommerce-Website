@@ -1,6 +1,11 @@
 import COLORS from "../../styles/Colors";
 import styled from "@emotion/styled";
-import { LogoutIcon, UserIcon, ViewListIcon } from "@heroicons/react/solid";
+import {
+  LogoutIcon,
+  UserIcon,
+  ViewListIcon,
+  BriefcaseIcon,
+} from "@heroicons/react/solid";
 import { useContext } from "react";
 import AuthContext from "../../../Contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -61,7 +66,8 @@ const IconContainer = styled.span`
   border-radius: 50%;
 `;
 
-const UserDropDown = () => {
+const UserDropDown = ({ user }) => {
+  console.log(user);
   let { logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -78,12 +84,31 @@ const UserDropDown = () => {
         </IconContainer>
         <OptionText>Account Details</OptionText>
       </Option>
-      <Option onClick={() => navigate("/MyOrders")}>
-        <IconContainer>
-          <ViewListIcon width="1.5rem" />
-        </IconContainer>
-        <OptionText>My Orders</OptionText>
-      </Option>
+      {user?.role == "Customer" && (
+        <Option onClick={() => navigate("/MyOrders")}>
+          <IconContainer>
+            <ViewListIcon width="1.5rem" />
+          </IconContainer>
+          <OptionText>My Orders</OptionText>
+        </Option>
+      )}
+      {user?.role == "Vendor" && (
+        <Option onClick={() => navigate("/MyProducts")}>
+          <IconContainer>
+            <BriefcaseIcon width="1.5rem" />
+          </IconContainer>
+          <OptionText>My Products</OptionText>
+        </Option>
+      )}
+      {user?.role == "Vendor" && (
+        <Option onClick={() => navigate("/MyOrders")}>
+          <IconContainer>
+            <ViewListIcon width="1.5rem" />
+          </IconContainer>
+          <OptionText>Customers Orders</OptionText>
+        </Option>
+      )}
+
       <Option onClick={handleLogout}>
         <IconContainer>
           <LogoutIcon width="1.5rem" />
