@@ -113,6 +113,27 @@ export const fetchFeaturedData = async () => {
     throw new Error("Failed to fetch subcategory data");
   }
 };
+export const fetchVendorData = async (
+  vendor = undefined,
+  page = 1,
+  dataInfo = [],
+  prevPage = 1
+) => {
+  try {
+    const response = await clientProduct.listProducts(
+      {
+        vendor: vendor,
+      },
+      page,
+      dataInfo,
+      prevPage
+    );
+
+    return response;
+  } catch (error) {
+    throw new Error("Failed to fetch subcategory data");
+  }
+};
 
 export const fetchData = async (
   sizeFilter = undefined,

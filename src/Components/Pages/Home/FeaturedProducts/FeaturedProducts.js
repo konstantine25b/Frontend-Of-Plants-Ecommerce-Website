@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { useQuery } from "react-query";
-import { clientProduct } from "../../../../Client/products/Product";
 import FeaturedProductList from "./FeaturedProductList";
 import { useNavigate } from "react-router-dom";
 import { fetchFeaturedData } from "../../../../Client/Requests/ProductRequests";
