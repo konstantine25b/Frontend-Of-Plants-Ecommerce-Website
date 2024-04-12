@@ -26,7 +26,9 @@ This is a full-stack e-commerce marketplace project built with React.js and Djan
 
 ## The backend of this app using Django REST Framework (DRF) is hosted on DigitalOcean.
 
-### Domain: apikosaplants.online   (Secured link: https://www.apikosaplants.online/ ) 
+### Domain: apikosaplants.online   
+### (Secured link: https://www.apikosaplants.online/ ) (It will show Not Found, because in my backend I have Debug=False, 
+### therefore if you want to see that my API is working visit: https://www.apikosaplants.online/admin/ 
 ### IP Address: 164.92.170.208
 
 ## Getting Started
