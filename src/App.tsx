@@ -23,6 +23,7 @@ import EachOrderPage from "./Components/Pages/Order/EachOrderPage";
 import MyProducts from "./Components/Pages/Vendors/MyProducts/MyProducts";
 import AddProduct from "./Components/Pages/Vendors/MyProducts/AddProduct";
 import MyProductDetails from "./Components/Pages/Vendors/MyProducts/MyProductComponents.js/MyProductDetails";
+import CustomerOrders from "./Components/Pages/Vendors/CustomersOrders/CustomerOrders";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,6 +45,7 @@ const router = createBrowserRouter(
       <Route path="/MyProducts" element={<MyProducts/>} />
       <Route path="/MyProductDetails" element={<MyProductDetails/>} />
       <Route path="/AddProduct" element={<AddProduct/>} />
+      <Route path="/CustomerOrders" element={<CustomerOrders/>} />
 
     </Route>
   )

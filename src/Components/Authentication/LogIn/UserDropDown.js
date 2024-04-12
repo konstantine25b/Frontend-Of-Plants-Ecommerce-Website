@@ -100,14 +100,14 @@ const UserDropDown = ({ user }) => {
           <OptionText>My Products</OptionText>
         </Option>
       )}
-      {user?.role == "Vendor" && (
-        <Option onClick={() => navigate("/MyOrders")}>
+      {/* {user?.role == "Vendor" && (
+        <Option onClick={() => navigate("/CustomerOrders")}>
           <IconContainer>
             <ViewListIcon width="1.5rem" />
           </IconContainer>
           <OptionText>Customers Orders</OptionText>
         </Option>
-      )}
+      )} */}
 
       <Option onClick={handleLogout}>
         <IconContainer>
