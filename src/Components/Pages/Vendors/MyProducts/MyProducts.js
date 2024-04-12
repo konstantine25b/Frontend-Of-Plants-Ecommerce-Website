@@ -5,7 +5,7 @@ import AuthContext from "../../../../Contexts/AuthContext";
 import { fetchVendorData } from "../../../../Client/Requests/ProductRequests";
 import { useQuery } from "react-query";
 import COLORS from "../../../styles/Colors";
-import RightSide from "../../SubCategories/RightSide/RightSide";
+import Products from "./MyProductComponents.js/Products";
 
 const Container = styled.div`
   text-align: center;
@@ -73,7 +73,7 @@ const MyProducts = () => {
       <Title>My Products</Title>
       <AddButton onClick={navigateToAddProduct}>Add Product</AddButton>
       <Component2>
-        <RightSide
+        <Products
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           setPrevPage={setPrevPage}
