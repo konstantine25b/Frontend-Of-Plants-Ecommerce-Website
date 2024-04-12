@@ -70,7 +70,7 @@ const EachProduct = ({ product }) => {
   return (
     <ProductItem
       onClick={() =>
-        navigate(`/EachProduct`, {
+        navigate(`/MyProductDetails`, {
           state: {
             product: product,
           },
