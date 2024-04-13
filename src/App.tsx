@@ -47,6 +47,7 @@ const router = createHashRouter(
       <Route path="/MyProductDetails" element={<MyProductDetails/>} />
       <Route path="/AddProduct" element={<AddProduct/>} />
       <Route path="/CustomerOrders" element={<CustomerOrders/>} />
+      
 
     </Route>
   )
