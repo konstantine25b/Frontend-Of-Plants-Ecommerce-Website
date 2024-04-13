@@ -3,6 +3,7 @@ import {
   Route,
   RouterProvider,
   createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
 } from "react-router-dom";
 import Root from "./Root";
@@ -25,7 +26,7 @@ import AddProduct from "./Components/Pages/Vendors/MyProducts/AddProduct";
 import MyProductDetails from "./Components/Pages/Vendors/MyProducts/MyProductComponents.js/MyProductDetails";
 import CustomerOrders from "./Components/Pages/Vendors/CustomersOrders/CustomerOrders";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index={true} element={<Home />} />
