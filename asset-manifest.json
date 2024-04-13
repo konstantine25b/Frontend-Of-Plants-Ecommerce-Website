@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Frontend-Of-Plants-Ecommerce-website/static/css/main.daaec7b8.css",
-    "main.js": "/Frontend-Of-Plants-Ecommerce-website/static/js/main.bb66fe1b.js",
+    "main.js": "/Frontend-Of-Plants-Ecommerce-website/static/js/main.90eac8c6.js",
     "static/media/KosaPlants_logo.png": "/Frontend-Of-Plants-Ecommerce-website/static/media/KosaPlants_logo.136c562e19026b2c8d67.png",
     "index.html": "/Frontend-Of-Plants-Ecommerce-website/index.html",
     "main.daaec7b8.css.map": "/Frontend-Of-Plants-Ecommerce-website/static/css/main.daaec7b8.css.map",
-    "main.bb66fe1b.js.map": "/Frontend-Of-Plants-Ecommerce-website/static/js/main.bb66fe1b.js.map"
+    "main.90eac8c6.js.map": "/Frontend-Of-Plants-Ecommerce-website/static/js/main.90eac8c6.js.map"
   },
   "entrypoints": [
     "static/css/main.daaec7b8.css",
-    "static/js/main.bb66fe1b.js"
+    "static/js/main.90eac8c6.js"
   ]
 }
