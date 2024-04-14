@@ -18,13 +18,14 @@ import Cart from "./Components/Pages/Cart/Cart";
 import Login from "./Components/Authentication/LogIn/Login";
 import SignUp from "./Components/Authentication/SignUp/SignUp";
 import Order from "./Components/Pages/Order/Order";
-import Profile from "./Components/Authentication/Profile/Profile";
+
 import MyOrders from "./Components/Pages/Order/MyOrders";
 import EachOrderPage from "./Components/Pages/Order/EachOrderPage";
 import MyProducts from "./Components/Pages/Vendors/MyProducts/MyProducts";
 import AddProduct from "./Components/Pages/Vendors/MyProducts/AddProduct";
 import MyProductDetails from "./Components/Pages/Vendors/MyProducts/MyProductComponents.js/MyProductDetails";
 import CustomerOrders from "./Components/Pages/Vendors/CustomersOrders/CustomerOrders";
+import Profile from "./Components/Profile/Profile";
 
 const router = createHashRouter(
   createRoutesFromElements(
