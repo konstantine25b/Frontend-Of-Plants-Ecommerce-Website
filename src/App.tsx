@@ -18,7 +18,7 @@ import Cart from "./Components/Pages/Cart/Cart";
 import Login from "./Components/Authentication/LogIn/Login";
 import SignUp from "./Components/Authentication/SignUp/SignUp";
 import Order from "./Components/Pages/Order/Order";
-// import Profile from "./Components/Authentication/Profile/Profile";
+import Profile from "./Components/Authentication/Profile/Profile";
 import MyOrders from "./Components/Pages/Order/MyOrders";
 import EachOrderPage from "./Components/Pages/Order/EachOrderPage";
 import MyProducts from "./Components/Pages/Vendors/MyProducts/MyProducts";
@@ -39,7 +39,7 @@ const router = createHashRouter(
       <Route path="/Cart" element={<Cart />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />} />
-      {/* <Route path="/Profile" element={<Profile />} /> */}
+      <Route path="/Profile" element={<Profile />} />
       <Route path="/Order" element={<Order />} />
       <Route path="/MyOrders" element={<MyOrders />} />
       <Route path="/EachOrder" element={<EachOrderPage />} />

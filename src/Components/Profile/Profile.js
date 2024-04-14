@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "@emotion/styled";
-import AuthContext from "../../../Contexts/AuthContext";
+import AuthContext from "../../Contexts/AuthContext";
 
 
 const ProfileContainer = styled.div`
