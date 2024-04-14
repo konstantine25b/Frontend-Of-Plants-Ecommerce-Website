@@ -2,6 +2,9 @@
 
 This is a full-stack e-commerce marketplace project built with React.js and Django Rest Framework. The project allows customers to browse and purchase products from vendors, while vendors can manage their products and customer orders.
 
+## Hosted on DigitalOcean
+### https://pla.apikosaplants.online/
+
 ## Features
 
 - **Authentication**: Users can sign up and log in using Simple JWT tokens.
